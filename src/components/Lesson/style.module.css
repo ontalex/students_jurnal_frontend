@@ -1,0 +1,58 @@
+.lesson {
+
+    display: grid;
+    grid-template-columns: auto max-content max-content;
+    gap: 16px;
+    align-items: center;
+
+    padding: 20px 20px;
+
+    border-radius: 4px;
+    
+    box-shadow: 1px 1px 4px #0003;
+    
+    margin-top: 16px;
+}
+
+.info_lesson,
+.info_teacher,
+.info_room {
+    margin: 0px;
+}
+
+.info {
+    display: grid;
+    gap: 4px;
+}
+
+.info_lesson {}
+
+.info_teacher {}
+
+.info_room {}
+
+.btn {
+    --btn_size: 42px;
+    width: var(--btn_size);
+    height: var(--btn_size);
+
+    border-radius: 4px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #A667E1;
+
+    transition: background-color .3s ease;
+
+    border: 0px;
+}
+
+.btn:hover {
+    background-color: #9455CF;
+}
+
+.icon {
+
+}

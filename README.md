@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+# Приложение журнала
+Журнал + расписание + входом в аккаунт
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Студент - пользователь, имеющий доступ только к просмотру расписания.
 
-## Available Scripts
+Администратор (далее админ) - человек имеющий доступ к данных группы, управляющий расписанием группы, взаимодействующий с журналом посещаемости.
 
-In the project directory, you can run:
+Проект направлен на улучшение и упрощение ведения учёта студентов. Основной упор на мобильную версию.
 
-### `npm start`
+## Ограничения доступа
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Студент - расписание (просмотр)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Админ (редактор) - расписание, журнал, главная страница
 
-### `npm test`
+## Подробнее про страницы
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Расписание (для студента)
+Доступна только возможность просмотра данных.
 
-### `npm run build`
+### Расписание (для администратора)
+Админ может просматривать, редактировать данные. Для редактирования вызываются диалоговые окна, через которые Админ и изменяет\добавляет данные. 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+В диалоговом окне, после ввода данных необходимо подтвердить изменение данных для последующей отправки на сервер через REST API. Можно нажать на отмену ввода или закрыть окно, тогда поля ввода будут очищены и окно будет скрыто до следующего вызова.
+Так же имеется кнопка удаления пары, в таком случае данные пары будут очищены и закрыто окно редактирования.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Расписание выводится на один день, который можно выбрать через поле\кнопку выбора даты.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+При добавлении расписания можно ввести следующий данные: 
+- название предмета (с подсказкой вариантов), 
+- преподаватель (с подсказкой вариантов), 
+- добавить преподавателя (кнопка добавления преподавателя в случае раздельной работы), 
+- номер кабинета (поле ввода с номером кабинета, пропорционально количеству преподавателей), 
+- замена пары (флажок замены)
 
-### `npm run eject`
+Максимальное количество пар в день - 5. Однако могут быть дни, когда нужно приходить ко второй паре, а бывает и к третьей.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Для этого будут заранее заготовлены ячейки в количестве 5 штук, с возможностью создания учебных пары. При нажатии на пустую ячейку будет появляться окно добавления пары.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Посещаемость (администратор)
+Админ может ставить посещаемость студентов на конкретную пару.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Выбрать день и номер пары можно при помощи соответствующих полей ввода.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Наименование пары будет отображаться на экране, для большей точности и проверки данных.
 
-## Learn More
+В список изначально подгружаются все студенты группы. Если нету отмеченного статуса отсутствия, то в поле отображается пустое значение.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Для выбора или изменения статуса посещения студента группы, необходимо нажать на статус и выбрать соответствующий тип:
+- нб (отсутствие по болезни)
+- ну (отсутствие по уважительной причине)
+- н (отсутствие не уважительное)
+- о (опоздание)
+- присутствует (по умолчанию)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Отправка данных о посещаемости производится автоматически (без дополнительного подтверждения со стороны админа).
 
-### Code Splitting
+>(заметки по коду)
+> Для определения записи в базе данных, можно использовать комбинацию фио + дата. Такие поля создают уникальный комбинированный ключ.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Описание адресации проекта
 
-### Analyzing the Bundle Size
+{host} - основа адреса, доменное имя проекта.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Список адресов:
+- {host}/user - пользователь
 
-### Making a Progressive Web App
+- {host}/login - авторизация пользователя
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- {host}/admin - главная страница админа
+- {host}/admin/logbook - страница с посещаемостью
+- {host}/admin/schedule - страница с расписанием
+- {host}/admin/profile - страница с профилем
 
-### Advanced Configuration
+(Все страницы директории *admin* должны быть защищены аутентификацией по токену)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Дополнительное описание 
+Переход между страницами осуществляется посредством не открывающегося меню.
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
