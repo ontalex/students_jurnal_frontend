@@ -23,7 +23,6 @@ export default function NoneLesson(props) {
         <>
             <button className={st.btn} onClick={() => setOpen(true)}>
 
-                <span>#{props.index + 1}</span>
                 <PluseIcon className={st.btn_icon} />
                 <p className={st.btn_span}>Пара</p>
 
