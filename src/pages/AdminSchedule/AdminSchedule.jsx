@@ -13,19 +13,19 @@ const AdminSchedule = () => {
   let [lessons, setLessons] = useState([]);
 
 
-  let fetchDateLessons = async () => {
-    const response = await fetch('http://localhost:8080/api/lessons');
-    const result = await response.json();
-    setLessons(result);
-  };
-
-  let fetchDateTeachers = async () => {
-    const response = await fetch('http://localhost:8080/api/teachers');
-    const result = await response.json();
-    setTeachers(result);
-  }
-
   useEffect(() => {
+    const fetchDateLessons = async () => {
+      const response = await fetch('http://localhost:8080/api/lessons');
+      const result = await response.json();
+      setLessons(result);
+    };
+
+    const fetchDateTeachers = async () => {
+      const response = await fetch('http://localhost:8080/api/teachers');
+      const result = await response.json();
+      setTeachers(result);
+    };
+
     fetchDateTeachers();
     fetchDateLessons();
   }, []);
@@ -34,10 +34,13 @@ const AdminSchedule = () => {
   const memoizedLessons = useMemo(() => lessons, [lessons]);
 
   useEffect(() => {
+    if (!teachers.length || !lessons.length) {
+      return;
+    }
 
     let dateJSON = {
       "date_lesson": date
-    }
+    };
 
     fetch("http://localhost:8080/api/schedule/day", {
       method: "POST",
@@ -47,7 +50,6 @@ const AdminSchedule = () => {
       body: JSON.stringify(dateJSON)
     }).then(date => date.json()).then(
       (json) => {
-
         let temp = [{}, {}, {}, {}, {}];
 
         for (let i = 0; i < json.length; i++) {
@@ -55,14 +57,12 @@ const AdminSchedule = () => {
         }
 
         setList(temp);
-
-        console.log(json, temp);
       }
-    )
+    );
 
-    return () => { }
+    return () => {};
 
-  }, [date]);
+  }, [date, teachers, lessons]);
 
 
   let changeDate = (date) => {
