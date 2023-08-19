@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import st from "./style.module.css";
 
@@ -7,26 +7,12 @@ import Modal from "../Modal/Modal";
 
 export default function NoneLesson(props) {
 
+    useEffect(() => {
+        console.log("Lessons: ",props.lessons);
+        console.log("Teachers: ",props.teachers);
+    })
+
     let [open, setOpen] = useState(false);
-
-    let fetchDate = (type) => {
-        let data = [];
-
-        fetch("http://localhost:8080/api/" + type).then(
-            date => date.json()
-        ).then(
-            json => {
-                data = JSON.parse(
-                    JSON.stringify(json)
-                )
-                console.log(json);
-            }
-        )
-
-        console.log(data);
-
-        return data;
-    }
 
     let handlerSubmit = (e) => {
         e.privetDefault();
@@ -52,7 +38,7 @@ export default function NoneLesson(props) {
                     <datalist id="lessons">
                         {
                             
-                            fetchDate("lessons").map(
+                            props.lessons && props.lessons.map(
                                 (item) => {
                                     return <option value={item.name_lesson} key={item.id_lesson} />
                                 }
@@ -65,9 +51,9 @@ export default function NoneLesson(props) {
                     <datalist id="teachers">
                         <option value="">
                             {
-                                fetchDate("teachers").map(
+                                props.teachers && props.teachers.map(
                                     (item) => {
-                                        return <option value={item.name_lesson} key={item.id_lesson} />
+                                        return <option value={item.fullname} key={item.id_teacher} />
                                     }
                                 )
                             }

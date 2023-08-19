@@ -3,13 +3,35 @@ import NoneLesson from "../../components/NoneLesson/NoneLesson";
 import InputDate from "../../components/inputDate/InputDate";
 import "./AdminSchedule.css";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 
 const AdminSchedule = () => {
 
   let [list, setList] = useState([{}, {}, {}, {}, {}]);
-
   let [date, setDate] = useState(() => { return new Date() });
+  let [teachers, setTeachers] = useState([]);
+  let [lessons, setLessons] = useState([]);
+
+
+  let fetchDateLessons = async () => {
+    const response = await fetch('http://localhost:8080/api/lessons');
+    const result = await response.json();
+    setLessons(result);
+  };
+
+  let fetchDateTeachers = async () => {
+    const response = await fetch('http://localhost:8080/api/teachers');
+    const result = await response.json();
+    setTeachers(result);
+  }
+
+  useEffect(() => {
+    fetchDateTeachers();
+    fetchDateLessons();
+  }, []);
+
+  const memoizedTeachers = useMemo(() => teachers, [teachers]);
+  const memoizedLessons = useMemo(() => lessons, [lessons]);
 
   useEffect(() => {
 
@@ -25,7 +47,7 @@ const AdminSchedule = () => {
       body: JSON.stringify(dateJSON)
     }).then(date => date.json()).then(
       (json) => {
-        
+
         let temp = [{}, {}, {}, {}, {}];
 
         for (let i = 0; i < json.length; i++) {
@@ -38,9 +60,9 @@ const AdminSchedule = () => {
       }
     )
 
-    return () => {}
+    return () => { }
 
-    }, [date]);
+  }, [date]);
 
 
   let changeDate = (date) => {
@@ -52,12 +74,11 @@ const AdminSchedule = () => {
     <>
       <InputDate date={date} changeDate={changeDate} />
       <div className="list">
-        {/* <p>{date.toLocaleDateString("ru", {day:"2-digit", month:"2-digit", year:"numeric"})}</p> */}
         {
           list.map((lesson, index) => {
             return Boolean(lesson?.name_lesson) ?
               <Lesson lesson={lesson} index={index} /> :
-              <NoneLesson index={index} />
+              <NoneLesson index={index} lessons={memoizedLessons} teachers={memoizedTeachers} />
           })
         }
       </div>
