@@ -34,6 +34,20 @@
     text-align: center;
 }
 
+.login_error {
+    padding: 10px 16px;
+
+    border-radius: 7px;
+    border: 1px solid red;
+
+    background-color: rgba(234, 54, 54, 0.3);
+
+    color: red;
+    font-family: sans-serif;
+    text-transform: capitalize;
+    text-align: center;
+}
+
 .form {
     display: grid;
     gap: 16px;

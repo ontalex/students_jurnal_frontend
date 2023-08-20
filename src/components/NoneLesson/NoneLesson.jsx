@@ -8,15 +8,56 @@ import Modal from "../Modal/Modal";
 export default function NoneLesson(props) {
 
     useEffect(() => {
-        console.log("Lessons: ",props.lessons);
-        console.log("Teachers: ",props.teachers);
+        console.log("Lessons: ", props.lessons);
+        console.log("Teachers: ", props.teachers);
+        console.log("Index: ", props.index);
+        console.log("Date: ", props.date);
     })
 
     let [open, setOpen] = useState(false);
 
     let handlerSubmit = (e) => {
-        e.privetDefault();
-        alert("submit form from Modal window");
+        e.preventDefault();
+
+        if ( e.target.lesson.value === ""  || e.target.teacher.value === "" || e.target.room.value === "" ) {
+            alert("Есть пустоты");
+            return true;
+        }
+
+        let data = {
+            date_lesson: new Date(props.date).toUTCString(),
+            number_lesson: props.index + 1,
+            name_lesson: e.target.lesson.value, // id_lesson
+            fullname_teacher: e.target.teacher.value, // id_teacher
+            room: Number(e.target.room.value)
+        }
+
+        console.log(data);
+
+        fetch("http://localhost:8080/api/schedule", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("token")
+            },
+            body: JSON.stringify(data)
+        })
+            .then(
+                data => data.json()
+            )
+            .then(
+                json => {
+                    console.log(json);
+
+                    e.target.lesson.value = 0;
+                    e.target.teacher.value = 0;
+                    e.target.room.value = 0;
+
+                    setOpen(false);
+                }
+            )
+            .catch()
+
     };
 
     return (
@@ -33,10 +74,10 @@ export default function NoneLesson(props) {
                 <h2 className={st.modal_header}>Создать пару</h2>
                 <form action="" onSubmit={handlerSubmit} className={st.form}>
 
-                    <input list="lessons" className={st.form_input} type="text" placeholder="Пара" />
+                    <input list="lessons" name="lesson" className={st.form_input} type="text" placeholder="Пара" />
                     <datalist id="lessons">
                         {
-                            
+
                             props.lessons && props.lessons.map(
                                 (item) => {
                                     return <option value={item.name_lesson} key={item.id_lesson} />
@@ -46,7 +87,7 @@ export default function NoneLesson(props) {
                         }
                     </datalist>
 
-                    <input list="teachers" className={st.form_input} type="text" placeholder="Преподаватель" />
+                    <input list="teachers" name="teacher" className={st.form_input} type="text" placeholder="Преподаватель" />
                     <datalist id="teachers">
                         <option value="">
                             {
@@ -59,7 +100,7 @@ export default function NoneLesson(props) {
                         </option>
                     </datalist>
 
-                    <input className={st.form_input} type="number" name="" id="" placeholder="Кабинет" min={100} max={399} />
+                    <input className={st.form_input} type="number" name="room" id="" placeholder="Кабинет" min={100} max={399} />
 
                     <button type="submit" className={st.form_btn}>
                         <PluseIcon className={st.form_icon} />
