@@ -1,4 +1,4 @@
-import Lesson from "../../components/Lesson/Lesson";
+import Lesson from "../../components/LessonAdmin/LessonAdmin";
 import NoneLesson from "../../components/NoneLesson/NoneLesson";
 import InputDate from "../../components/inputDate/InputDate";
 import "./AdminSchedule.css";
@@ -60,7 +60,7 @@ const AdminSchedule = () => {
       }
     );
 
-    return () => {};
+    return () => { };
 
   }, [date, teachers, lessons]);
 
@@ -78,7 +78,7 @@ const AdminSchedule = () => {
           list.map((lesson, index) => {
             return Boolean(lesson?.name_lesson) ?
               <Lesson lesson={lesson} index={index} /> :
-              <NoneLesson index={index} lessons={memoizedLessons} teachers={memoizedTeachers} />
+              <NoneLesson date={date} index={index} lessons={memoizedLessons} teachers={memoizedTeachers} />
           })
         }
       </div>
