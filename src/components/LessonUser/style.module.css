@@ -1,0 +1,32 @@
+.lesson {
+
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    gap: 16px;
+    align-items: center;
+
+    padding: 20px 20px;
+
+    border-radius: 4px;
+    
+    box-shadow: 1px 1px 4px #0003;
+    
+    margin-top: 16px;
+}
+
+.info_lesson,
+.info_teacher,
+.info_room {
+    margin: 0px;
+}
+
+.info {
+    display: grid;
+    gap: 4px;
+}
+
+.info_lesson {}
+
+.info_teacher {}
+
+.info_room {}

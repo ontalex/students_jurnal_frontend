@@ -1,19 +1,43 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import st from "./Login.module.css";
 
-import React from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
+import { useAuth } from "../../hooks/useAuth";
 
 export default function Login() {
 
-  let navigate = useNavigate();
+  
 
-  let handlerSubmit = (e) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { signin, check } = useAuth();
+
+  const fromPage = location.state?.from?.pathname || "/admin/schedule";
+
+  let [error, setError] = useState(false);
+
+  const handlerSubmit = (e) => {
+
     e.preventDefault();
 
-    alert(`login: ${e.target.login.value};\npassword: ${e.target.password.value};`);
+    const user = {
+      password: e.target.password.value,
+      login: e.target.login.value,
+    }
 
-    navigate("/admin/schedule")
+    signin(user, () => {
+      setError(false)
+      navigate(fromPage, { relative: true })
+    }, () => setError(true));
+
   }
+
+  useEffect(() => {
+    check(() => {
+      // setError(false)
+      navigate(fromPage, { relative: true })
+    });
+  });
 
   return (
     <>
@@ -22,19 +46,21 @@ export default function Login() {
 
           <h1>Вход</h1>
 
+          {error ? <span class={st.login_error}>Ошибка логина\пароля</span> : null}
+
           <form action="" className={st.form} onSubmit={(e) => handlerSubmit(e)}>
 
 
             <div className={st.label}>
               <span className={st.label__name}>Логин</span>
-              <input className={st.label__input} type="text" placeholder="login" name="login" autoComplete="username" autoFocus={true}/>
+              <input className={st.label__input} type="text" placeholder="login" name="login" autoComplete="username" autoFocus={true} />
             </div>
 
 
 
             <div className={st.label}>
               <span className={st.label__name}>Пароль</span>
-              <input className={st.label__input} type="password" placeholder="1234" name="password" autoComplete="current-password"/>
+              <input className={st.label__input} type="password" placeholder="1234" name="password" autoComplete="current-password" />
             </div>
 
 
