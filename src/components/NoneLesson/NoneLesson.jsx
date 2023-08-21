@@ -19,7 +19,7 @@ export default function NoneLesson(props) {
     let handlerSubmit = (e) => {
         e.preventDefault();
 
-        if ( e.target.lesson.value === ""  || e.target.teacher.value === "" || e.target.room.value === "" ) {
+        if (e.target.lesson.value === "" || e.target.teacher.value === "" || e.target.room.value === "") {
             alert("Есть пустоты");
             return true;
         }
@@ -52,6 +52,8 @@ export default function NoneLesson(props) {
                     e.target.lesson.value = 0;
                     e.target.teacher.value = 0;
                     e.target.room.value = 0;
+
+                    props.changeDate(new Date(props.date));
 
                     setOpen(false);
                 }
