@@ -77,7 +77,14 @@ const AdminSchedule = () => {
         {
           list.map((lesson, index) => {
             return Boolean(lesson?.name_lesson) ?
-              <Lesson lesson={lesson} index={index} changeDate={changeDate} /> :
+              <Lesson
+                date={date}
+                index={index}
+                lesson={lesson}
+                lessons={memoizedLessons}
+                teachers={memoizedTeachers}
+                changeDate={changeDate} 
+              /> :
               <NoneLesson
                 date={date}
                 index={index}
