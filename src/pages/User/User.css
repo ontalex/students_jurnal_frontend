@@ -13,3 +13,9 @@
     padding-top: 32px;
     padding-bottom: 120px;
 }
+
+.user_none {
+    text-align: center;
+    margin: 32px 0;
+    font-size: 20px;
+}

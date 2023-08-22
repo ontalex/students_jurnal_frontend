@@ -45,7 +45,7 @@ export default function User() {
               item => {
                 return <Lesson lesson={item} />
               }
-            ) : <p>Нету пар</p>
+            ) : <p className="user_none">Нету пар</p>
           }
         </div>
 
