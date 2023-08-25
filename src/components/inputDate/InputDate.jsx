@@ -7,7 +7,6 @@ import React from 'react'
 export default function InputDate({changeDate, date}) {
 
     let handlerDate = (e) => {
-      // setDate(e.target.value);
       changeDate(e.target.value);
     } 
 

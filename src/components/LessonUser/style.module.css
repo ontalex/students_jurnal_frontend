@@ -1,5 +1,4 @@
 .lesson {
-
     display: grid;
     grid-template-columns: min-content 1fr;
     gap: 16px;
@@ -30,3 +29,7 @@
 .info_teacher {}
 
 .info_room {}
+
+.lesson_icon {
+    height: 72px;
+}

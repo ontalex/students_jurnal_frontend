@@ -7,12 +7,15 @@ export default function Lesson({ lesson }) {
         <div className={st.lesson}>
 
             <span>№{lesson.number}</span>
+
             <div className={st.info}>
+
                 <h2 className={st.info_lesson}>{lesson.name_lesson}</h2>
                 <p className={st.info_teacher}>{lesson.teacher}</p>
                 <p className={st.info_room}>Аудитория: {lesson.room}</p>
+                
             </div>
-            
+
         </div>
     )
 }
