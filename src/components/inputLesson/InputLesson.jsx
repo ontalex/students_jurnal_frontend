@@ -26,12 +26,12 @@ export default function InputLesson(props) {
       .then(
         (json) => {
           console.table(json);
-          props.setLesson(json[0].id_schedule);
+          props.changeLesson(json[0]?.id_schedule || null);
           setSchedule(json);
         }
       );
 
-  }, []);
+  }, [props.date]);
 
 
   return (
@@ -43,7 +43,7 @@ export default function InputLesson(props) {
             className={st.box_select} 
             name="schedule" 
             id="schedule_id" 
-            onChange={(e) => props.setLesson(e.target.value)} 
+            onChange={(e) => props.changeLesson(Number(e.target.value))} 
             defaultValue={schedule[0]}>
 
             {
@@ -56,7 +56,7 @@ export default function InputLesson(props) {
               )
             }
 
-          </select>) : <p>Нету пар</p>}
+          </select>) : <p>Нету данных на день</p>}
 
       </label>
     </>

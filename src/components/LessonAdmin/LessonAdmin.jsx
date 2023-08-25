@@ -141,7 +141,7 @@ export default function Lesson(props) {
 
                     <button type="submit" className={st.form_btn}>
                         <PluseIcon className={st.form_icon} />
-                        <span className={st.form_span}>Отправить</span>
+                        <span className={st.form_span}>Изменить</span>
                     </button>
 
                 </form>

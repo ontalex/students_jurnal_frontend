@@ -16,27 +16,30 @@ export default function LogItem(props) {
 
     let handlerChose = (e) => {
 
-        if (e.target.value !== "" && props.log_type) {
+        console.group("handlerChose TYPE LOG");
+        console.log("e.target.value =", e.target.value);
+        console.log("props.log_type =", props.log_type);
+        console.log("props.id_log =", props.id_log);
+
+        if (e.target.value !== "" && props.log_type === undefined && props.id_log === undefined) {
 
             console.group("handlerChose (new state)");
             console.log("Chose: ", e.target.value);
-            console.table({ 
-                id_student: props.id_student, 
-                id_lesson: props.id_lesson, 
-                type_log: e.target.value 
+            console.table({
+                id_student: props.id_student,
+                id_lesson: props.id_lesson,
+                type_log: e.target.value
             });
             console.groupEnd();
 
             pushStateQuery.mutate(
-                { 
-                    id_student: props.id_student, 
-                    id_lesson: props.id_lesson, 
-                    type_log: e.target.value 
+                {
+                    id_student: props.id_student,
+                    id_lesson: props.id_lesson,
+                    type_log: e.target.value
                 }
             )
-        }
-
-        if (e.target.value !== props.log_type) {
+        } else {
 
             console.group("handlerChose (update state)");
             console.log("Chose to update: ", e.target.value);
@@ -53,6 +56,26 @@ export default function LogItem(props) {
                 }
             )
         }
+
+        // if (e.target.value !== props.log_type) {
+
+        //     console.group("handlerChose (update state)");
+        //     console.log("Chose to update: ", e.target.value);
+        //     console.table({
+        //         type_log: e.target.value,
+        //         id: props.id_log
+        //     });
+        //     console.groupEnd();
+
+        //     updateState.mutate(
+        //         {
+        //             type_log: e.target.value,
+        //             id: props.id_log
+        //         }
+        //     )
+        // }
+        
+        console.groupEnd();
     }
 
 

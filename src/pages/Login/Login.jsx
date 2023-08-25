@@ -1,22 +1,24 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import st from "./Login.module.css";
 
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuth } from "../../hooks/useAuth";
 
 export default function Login() {
 
-  
-
   const navigate = useNavigate();
   const location = useLocation();
+
+  let [error, setError] = useState(false);
+
   const { signin, check } = useAuth();
 
   const fromPage = location.state?.from?.pathname || "/admin/schedule";
 
-  let [error, setError] = useState(false);
 
   const handlerSubmit = (e) => {
+
+    console.log("Submit  из обработкчика из LoginPage");
 
     e.preventDefault();
 
@@ -26,18 +28,21 @@ export default function Login() {
     }
 
     signin(user, () => {
-      setError(false)
+      // setError(false)
+      console.log("Запрос из входа из LoginPage");
       navigate(fromPage, { relative: true })
     }, () => setError(true));
 
   }
 
   useEffect(() => {
+    console.log("Эффект из чек из LoginPage");
     check(() => {
       // setError(false)
+      console.log("Запрос из чек из LoginPage");
       navigate(fromPage, { relative: true })
     });
-  });
+  }, []);
 
   return (
     <>

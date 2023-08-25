@@ -14,10 +14,12 @@ export default function InputDate({changeDate, date}) {
     <>
 
         <label htmlFor="date" className={st.box}>
+
             <CalendarIcon className={st.icon}/>
-            <input type="date" name="date" id="date" value={date} onChange={handlerDate} className={st.input}/>
+            <input type="date" name="date" id="date" onChange={handlerDate} className={st.input} min="2023-09-01"/>
             <p className={st.info}>{new Intl.DateTimeFormat("ru", {day:"numeric", month:"long", year:"numeric"}).format(new Date(date))}</p>
             <p className={st.info}>{new Intl.DateTimeFormat("ru", {weekday: "long"}).format(new Date(date))}</p>
+            
         </label>
 
     </>
