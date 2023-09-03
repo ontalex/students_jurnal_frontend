@@ -1,6 +1,9 @@
-let BASE = "http://localhost:8080/api";
+let BASE = "https://ontalex.ru/alt/api";
 
 export const getDaySchedule = async (date) => {
+
+    console.log(">> RQ +start -----------===----");
+
     let body = {
         date_lesson: date,
     };

@@ -15,13 +15,13 @@ const AdminSchedule = () => {
 
   useEffect(() => {
     const fetchDateLessons = async () => {
-      const response = await fetch('http://localhost:8080/api/lessons');
+      const response = await fetch('https://ontalex.ru/alt/api/lessons');
       const result = await response.json();
       setLessons(result);
     };
 
     const fetchDateTeachers = async () => {
-      const response = await fetch('http://localhost:8080/api/teachers');
+      const response = await fetch('https://ontalex.ru/alt/api/teachers');
       const result = await response.json();
       setTeachers(result);
     };
@@ -42,7 +42,7 @@ const AdminSchedule = () => {
       "date_lesson": date
     };
 
-    fetch("http://localhost:8080/api/schedule/day", {
+    fetch("https://ontalex.ru/alt/api/schedule/day", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

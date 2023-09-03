@@ -17,13 +17,15 @@ export default function AdminLogbook() {
   let { mutate, isLoading } = useMutation({
     mutationFn: (id) => getLogs(id),
     onSuccess: (data, variables, context) => {
-      console.log(logs);
+      console.table(logs);
       setLogs(data);
     }
   })
 
   useEffect(() => {
-    mutate(lesson)
+    if(lesson) {
+      mutate(lesson)
+    }
   }, [lesson, date]);
 
   return (
@@ -31,7 +33,7 @@ export default function AdminLogbook() {
       <InputDate changeDate={setDate} date={date} />
       <InputLesson changeLesson={setLesson} date={date} />
       {isLoading ? <p>Loading...</p> : null}
-      <div>
+      <div className="logbook_list">
         {
           Boolean(logs.length) && Boolean(lesson) && !isLoading ?
             logs.map(
@@ -40,8 +42,9 @@ export default function AdminLogbook() {
                   id_lesson={lesson}
                   student_name={student.full_name}
                   id_student={student.id_student}
-                  key={student.id_student}
                   log_state={student.type_log || ''}
+                  id_log={student.id_log}
+                  key={student.id_student}
                 />
             ) :
             <p className="logbook_none">Нету данных :(</p>

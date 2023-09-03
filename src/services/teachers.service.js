@@ -1,4 +1,4 @@
-let BASE = "http://localhost:8080/api";
+let BASE = "https://ontalex.ru/alt/api";
 
 export let addTeacher = async (fullname) => {
     let body = {

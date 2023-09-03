@@ -1,4 +1,4 @@
-let BASE = "http://localhost:8080/api";
+let BASE = "https://ontalex.ru/alt/api";
 
 export const pushState = async (data) => {
 

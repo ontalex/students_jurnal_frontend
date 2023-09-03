@@ -22,7 +22,7 @@ export default function Lesson(props) {
 
     let handlerDelete = (e) => {
 
-        fetch(`http://localhost:8080/api/schedule?id=${props.lesson.id_schedule}`,{
+        fetch(`https://ontalex.ru/alt/api/schedule?id=${props.lesson.id_schedule}`,{
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -48,14 +48,14 @@ export default function Lesson(props) {
 
         let data = {
             id_schedule: props.lesson.id_schedule, 
-            name_lesson: e.target.lesson.value, 
-            room: e.target.room.value, 
+            name_lesson: e.target.lesson.value,
+            room: e.target.room.value.trim(), 
             fullname_teacher: e.target.teacher.value
         }
 
         console.log(data);
 
-        fetch("http://localhost:8080/api/schedule", {
+        fetch("https://ontalex.ru/alt/api/schedule", {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
@@ -137,7 +137,7 @@ export default function Lesson(props) {
                         </option>
                     </datalist>
 
-                    <input className={st.form_input} defaultValue={props.lesson.room} type="number" name="room" id="" placeholder="Кабинет" min={100} max={399} />
+                    <input className={st.form_input} defaultValue={props.lesson.room.trim()} type="text" name="room" id="" placeholder="Кабинет" minLength={3} maxLength={7} />
 
                     <button type="submit" className={st.form_btn}>
                         <PluseIcon className={st.form_icon} />

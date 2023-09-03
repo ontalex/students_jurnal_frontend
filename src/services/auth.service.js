@@ -1,4 +1,4 @@
-let BASE = "http://localhost:8080/api/";
+let BASE = "https://ontalex.ru/alt/api";
 
 export let auth = async ({login, password}) => {
     
@@ -31,4 +31,29 @@ export let authCheck = async () => {
 
     return !res.ok ? { status: "error" } : res.json();
 
-}   
+}
+
+export let authUpdate = async ({userID, login, password}) => {
+
+    console.log(userID, login, password);
+
+    let body = {
+        userID: userID,
+        login: login, 
+        password: password
+    }
+
+    console.log(JSON.stringify(body));
+
+    let res = await fetch(BASE + "user", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": localStorage.getItem("token") || ""
+        },
+        body: JSON.stringify(body)
+    });
+
+    return !res.ok ? { status: "error" } : res.json();
+
+}

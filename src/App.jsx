@@ -16,9 +16,14 @@ import { RequireAuth } from "./hoc/RequireAuth";
 import { AuthProvider } from "./hoc/AuthProvider";
 
 export default function App() {
+
+  React.useEffect(() => {
+    console.log("process.env.PUBLIC_URL = ", process.env.PUBLIC_URL);
+});
+
   return (
     <div className={st.app}>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <AuthProvider>
           <Routes>
 
