@@ -17,7 +17,7 @@ export default function User() {
 
     console.log(body);
 
-    fetch("http://84.201.174.137:8080/api/schedule/day", {
+    fetch("https://ontalex.ru/alt/api/schedule/day", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'

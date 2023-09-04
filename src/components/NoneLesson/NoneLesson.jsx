@@ -27,7 +27,7 @@ export default function NoneLesson(props) {
 
         console.log(data);
 
-        fetch("http://84.201.174.137:8080/api/schedule", {
+        fetch("https://ontalex.ru/alt/api/schedule", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

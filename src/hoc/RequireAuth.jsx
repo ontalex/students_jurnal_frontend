@@ -15,7 +15,8 @@ const RequireAuth = ({ children }) => {
         console.log(">> NAV to LOGIN");
         return (
             <Navigate
-                to={`${process.env.PUBLIC_URL}/login`}
+                // to={`${process.env.PUBLIC_URL}/login`}
+                to={`login`}
                 state={{ from: location }}
             />
         );

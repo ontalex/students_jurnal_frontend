@@ -22,7 +22,7 @@
     border-radius: 6px;
     background: #eaeaea;
     border: 0px;
-    font-size: 16px
+    font-size: 16px;
 }
 
 .profile__input--login {
@@ -31,7 +31,8 @@
 .profile__input--password {
 }
 
-.profile__change, .profile__exit {
+.profile__change,
+.profile__exit {
     border-radius: 6px;
     background-color: #a667e1;
     padding: 14px 16px;
@@ -42,7 +43,7 @@
     font-size: 16px;
     font-weight: 400;
 
-    transition: background-color .3s ease;
+    transition: background-color 0.3s ease;
 
     display: flex;
     justify-content: center;
@@ -50,7 +51,7 @@
     gap: 10px;
 }
 
-.profile__change:hover, 
-.profile__exit:hover { 
-    background-color: #7738B2;
+.profile__change:hover,
+.profile__exit:hover {
+    background-color: #7738b2;
 }

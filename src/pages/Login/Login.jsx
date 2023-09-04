@@ -12,6 +12,8 @@ export default function Login() {
 
     const { signin, check } = useAuth();
 
+    const fromPage = location.state?.from?.pathname || "/admin/schedule";
+    
     useEffect(() => {
         console.clear();
         console.log("process.env.PUBLIC_URL = ", process.env.PUBLIC_URL);
@@ -19,7 +21,6 @@ export default function Login() {
         console.log(location);
     });
 
-    const fromPage = location.state?.from?.pathname || "/admin/schedule";
     // const fromPage = location.state?.pathname;
 
     const handlerSubmit = (e) => {

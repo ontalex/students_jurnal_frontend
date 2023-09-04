@@ -1,6 +1,6 @@
 import st from "./app.module.css";
 
-import React from 'react'
+import React from "react";
 import Admin from "./pages/Admin/Admin";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -14,39 +14,45 @@ import User from "./pages/User/User";
 
 import { RequireAuth } from "./hoc/RequireAuth";
 import { AuthProvider } from "./hoc/AuthProvider";
+import Start from "./pages/Start/Start";
 
 export default function App() {
+    React.useEffect(() => {
+        console.log("process.env.PUBLIC_URL = ", process.env.PUBLIC_URL);
+    });
 
-  React.useEffect(() => {
-    console.log("process.env.PUBLIC_URL = ", process.env.PUBLIC_URL);
-});
+    return (
+        <div className={st.app}>
+            <BrowserRouter basename={process.env.PUBLIC_URL}>
+                <AuthProvider>
+                    <Routes>
+                        <Route
+                            path="/admin"
+                            element={
+                                <RequireAuth>
+                                    <Admin />
+                                </RequireAuth>
+                            }
+                        >
+                            <Route index element={<AdminHome />} />
+                            <Route path="*" element={<AdminHome />} />
 
-  return (
-    <div className={st.app}>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
-        <AuthProvider>
-          <Routes>
+                            <Route
+                                path="schedule"
+                                element={<AdminSchedule />}
+                            />
+                            <Route path="logbook" element={<AdminLogbook />} />
+                            <Route path="profile" element={<AdminProfile />} />
+                        </Route>
 
-            <Route path="/admin" element={<RequireAuth><Admin /></RequireAuth>}>
+                        <Route path="/*" element={<Start />} />
 
-              <Route index element={<AdminHome />} />
-              <Route path="*" element={<AdminHome />} />
+                        <Route path="/login" element={<Login />} />
 
-              <Route path="schedule" element={<AdminSchedule />} />
-              <Route path="logbook" element={<AdminLogbook />} />
-              <Route path="profile" element={<AdminProfile />} />
-
-            </Route>
-
-            <Route path="*" element={<Login />} />
-
-            <Route path="/login" element={<Login />} />
-
-            <Route path="/user" element={<User />} />
-
-          </Routes>
-        </AuthProvider>
-      </BrowserRouter>
-    </div>
-  )
+                        <Route path="/user" element={<User />} />
+                    </Routes>
+                </AuthProvider>
+            </BrowserRouter>
+        </div>
+    );
 }
