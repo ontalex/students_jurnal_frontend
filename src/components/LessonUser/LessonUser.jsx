@@ -18,7 +18,7 @@ export default function Lesson({ lesson }) {
                 return "14:30 - 16:00";
                 break;
             case 5:
-                return "14:30 - 16:40";
+                return "16:10 - 17:40";
                 break;
         };
     });
