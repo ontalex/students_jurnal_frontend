@@ -3,7 +3,7 @@ import st from "./app.module.css";
 import React from "react";
 import Admin from "./pages/Admin/Admin";
 
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter as BrowserRouter, Route, Routes } from "react-router-dom";
 
 import AdminHome from "./pages/AdminHome/AdminHome";
 import AdminSchedule from "./pages/AdminSchedule/AdminSchedule";
@@ -20,7 +20,7 @@ export default function App() {
     
     return (
         <div className={st.app}>
-            <BrowserRouter basename={process.env.PUBLIC_URL}>
+            <BrowserRouter>
                 <AuthProvider>
                     <Routes>
                         <Route
