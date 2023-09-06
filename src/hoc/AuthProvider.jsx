@@ -15,7 +15,6 @@ export const AuthProvider = ({ children }) => {
         })
             .then((data) => data.json())
             .then((json) => {
-                console.log(json);
                 if (json.type === "Accept") {
                     setUser({
                         userID: json.userID,
@@ -33,8 +32,6 @@ export const AuthProvider = ({ children }) => {
             ...newUser,
         };
 
-        console.log(userData);
-
         fetch("https://ontalex.ru/alt/api/auth", {
             method: "POST",
             headers: {
@@ -50,11 +47,6 @@ export const AuthProvider = ({ children }) => {
                         login: json.data.login,
                         token: json.data.token,
                     });
-
-                    console.group("signin Check");
-                    console.log(userData);
-                    console.log(user);
-                    console.groupEnd();
 
                     localStorage.setItem("token", json.data.token);
 

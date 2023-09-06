@@ -19,7 +19,7 @@ export default function Start() {
                         <span className={st.link_span}>Я - Студент</span>
                     </NavLink>
 
-                    <NavLink to={"login"} className={st.link}>
+                    <NavLink to={"admin/schedule"} className={st.link}>
                         <span className={st.link_span}>Я - Администратор</span>
                     </NavLink>
                 </div>

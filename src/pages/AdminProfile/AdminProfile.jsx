@@ -15,10 +15,6 @@ export default function AdminProfile() {
         mutationFn: (data) => authUpdate(data),
     });
 
-    useEffect(() => {
-        console.table(user);
-    }, []);
-
     let handlerSubmit = (e) => {
         e.preventDefault();
         mutate({

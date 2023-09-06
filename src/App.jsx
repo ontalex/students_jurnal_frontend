@@ -17,17 +17,19 @@ import { AuthProvider } from "./hoc/AuthProvider";
 import Start from "./pages/Start/Start";
 
 export default function App() {
-    React.useEffect(() => {
-        console.log("process.env.PUBLIC_URL = ", process.env.PUBLIC_URL);
-    });
-
+    
     return (
         <div className={st.app}>
             <BrowserRouter basename={process.env.PUBLIC_URL}>
                 <AuthProvider>
                     <Routes>
                         <Route
-                            path="/admin"
+                            path={`/`}
+                            element={<Start />}
+                        ></Route>
+
+                        <Route
+                            path={`admin`}
                             element={
                                 <RequireAuth>
                                     <Admin />
@@ -35,7 +37,6 @@ export default function App() {
                             }
                         >
                             <Route index element={<AdminHome />} />
-                            <Route path="*" element={<AdminHome />} />
 
                             <Route
                                 path="schedule"
@@ -45,11 +46,15 @@ export default function App() {
                             <Route path="profile" element={<AdminProfile />} />
                         </Route>
 
-                        <Route path="/*" element={<Start />} />
+                        <Route
+                            path={`login`}
+                            element={<Login />}
+                        />
 
-                        <Route path="/login" element={<Login />} />
-
-                        <Route path="/user" element={<User />} />
+                        <Route
+                            path={`user`}
+                            element={<User />}
+                        />
                     </Routes>
                 </AuthProvider>
             </BrowserRouter>

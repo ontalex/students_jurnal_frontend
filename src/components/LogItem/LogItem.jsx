@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import st from "./style.module.css";
 import { useMutation } from "react-query";
@@ -17,7 +17,6 @@ export default function LogItem(props) {
     let pushStateQuery = useMutation({
         mutationFn: (data) => pushState(data),
         onSuccess: (data, vars, context) => {
-            console.log(data);
             setLog({
                 id: data[0].id_log,
                 type: data[0].type_log,
@@ -28,7 +27,6 @@ export default function LogItem(props) {
     let updateState = useMutation({
         mutationFn: (dataBody) => updateLog(dataBody),
         onSuccess: (data, vars, context) => {
-            console.log(data);
             setLog({
                 id: data[0]?.id_log || log.id,
                 type: data[0]?.type_log || log.type,
@@ -39,7 +37,6 @@ export default function LogItem(props) {
     let deleteState = useMutation({
         mutationFn: (id) => deleteLog(id),
         onSuccess: (data, vars, context) => {
-            console.log(data);
             setLog({
                 ...log,
                 type: undefined,
@@ -48,17 +45,6 @@ export default function LogItem(props) {
     });
 
     let handlerChose = (e) => {
-        console.group("handlerChose TYPE LOG");
-        console.log("e.target.value =", e.target.value);
-        console.log("log.type =", log.type);
-        console.log("log.id =", log.id);
-
-        console.table({
-            input: e.target.value,
-            state_type: log.type,
-            state_id: log.id,
-        });
-
         if (e.target.value !== "-" && log.id === null) {
             console.log("handlerChose (new state)");
 
@@ -68,12 +54,8 @@ export default function LogItem(props) {
                 type_log: e.target.value,
             });
         } else if (e.target.value === "-" && log.id !== undefined) {
-            console.log("handlerChose (delete state)");
-
             deleteState.mutate(log.id);
         } else if (log.type !== e.target.value && log.id !== undefined) {
-            console.log("handlerChose (update state)");
-
             updateState.mutate({
                 id: log.id,
                 type_log: e.target.value,

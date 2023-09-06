@@ -31,7 +31,6 @@ export default function Lesson(props) {
         })
             .then(data => data.json())
             .then(json => {
-                console.log(json);
                 props.changeDate(new Date(props.date));
             })
 
@@ -68,7 +67,6 @@ export default function Lesson(props) {
             )
             .then(
                 json => {
-                    console.log(json);
 
                     e.target.lesson.value = 0;
                     e.target.teacher.value = 0;

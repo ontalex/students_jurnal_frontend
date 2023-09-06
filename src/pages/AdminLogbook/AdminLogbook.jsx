@@ -17,7 +17,6 @@ export default function AdminLogbook() {
   let { mutate, isLoading } = useMutation({
     mutationFn: (id) => getLogs(id),
     onSuccess: (data, variables, context) => {
-      console.table(logs);
       setLogs(data);
     }
   })

@@ -67,7 +67,6 @@ const AdminSchedule = () => {
 
   let changeDate = (date) => {
     setDate(date);
-    console.log("Rerender on 'changeDate'");
   };
 
   return (

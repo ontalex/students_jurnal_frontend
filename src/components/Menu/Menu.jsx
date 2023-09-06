@@ -13,25 +13,21 @@ export const Menu = () => {
   return (
     <nav className="menu">
 
-      {/* <NavLink to={`${process.env.PUBLIC_URL}/admin`} className="menu__link"> */}
-      <NavLink to={`admin`} className="menu__link">
+      <NavLink to={`../admin`} className="menu__link">
         <Home_icon className="menu__icon" />
         <span className="menu__name">Главная</span>
       </NavLink>
 
-      {/* <NavLink to={`${process.env.PUBLIC_URL}/admin/schedule`} className="menu__link"> */}
       <NavLink to={`schedule`} className="menu__link">
         <Notebook_icon className="menu__icon" />
         <span className="menu__name">Пары</span>
       </NavLink>
 
-      {/* <NavLink to={`${process.env.PUBLIC_URL}/admin/logbook`} className="menu__link"> */}
       <NavLink to={`logbook`} className="menu__link">
         <Calendar_icon className="menu__icon" />
         <span className="menu__name">Учёт</span>
       </NavLink>
       
-      {/* <NavLink to={`${process.env.PUBLIC_URL}/admin/profile`} className="menu__link"> */}
       <NavLink to={`profile`} className="menu__link">
         <Profile_icon className="menu__icon" />
         <span className="menu__name">Профиль</span>

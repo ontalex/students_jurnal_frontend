@@ -13,18 +13,8 @@ export default function Login() {
     const { signin, check } = useAuth();
 
     const fromPage = location.state?.from?.pathname || "/admin/schedule";
-    
-    useEffect(() => {
-        console.clear();
-        console.log("process.env.PUBLIC_URL = ", process.env.PUBLIC_URL);
-        console.log(location.state?.from?.pathname);
-        console.log(location);
-    });
-
-    // const fromPage = location.state?.pathname;
 
     const handlerSubmit = (e) => {
-        console.log("Submit  из обработкчика из LoginPage");
 
         e.preventDefault();
 
@@ -36,8 +26,6 @@ export default function Login() {
         signin(
             user,
             () => {
-                // setError(false)
-                console.log("Запрос из входа из LoginPage");
                 navigate(fromPage, { relative: true });
             },
             () => setError(true)
@@ -45,10 +33,7 @@ export default function Login() {
     };
 
     useEffect(() => {
-        console.log("Эффект из чек из LoginPage");
         check(() => {
-            // setError(false)
-            console.log("Запрос из чек из LoginPage");
             navigate(fromPage, { relative: true });
         });
     }, []);
