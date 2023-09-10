@@ -1,7 +1,7 @@
 .profile {
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: start;
     gap: 20px;
     min-height: 85vh;
 }
@@ -14,15 +14,15 @@
 
     display: grid;
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 20px;
 }
 
 .profile__input {
-    padding: 14px 16px;
+    padding: 18px 24px;
     border-radius: 6px;
     background: #eaeaea;
     border: 0px;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .profile__input--login {
@@ -31,16 +31,22 @@
 .profile__input--password {
 }
 
+.exit__icon {
+    --size: 24px;
+    width: var(--size);
+    height: var(--size);
+}
+
 .profile__change,
 .profile__exit {
     border-radius: 6px;
     background-color: #a667e1;
-    padding: 14px 16px;
+    padding: 18px 16px;
     border: 0px;
 
     color: #ffffff;
     font-family: "Roboto-Regular", Helvetica;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
 
     transition: background-color 0.3s ease;
@@ -54,4 +60,35 @@
 .profile__change:hover,
 .profile__exit:hover {
     background-color: #7738b2;
+}
+
+.profile__alert {
+    --padding: 12px;
+    
+    padding: var(--padding);
+    
+    border-width: 2px;
+    border-style: solid;
+    border-radius: calc(0.75 * var(--padding));
+
+    text-align: center;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-transform: uppercase;
+}
+
+.profile__error {
+    border-color: red;
+    
+    background-color: rgba(255, 0, 0, 0.1);
+    
+    color: red;
+}
+
+.profile__loading {
+    border-color: blue;
+    
+    background-color: rgba(0, 0, 255, 0.1);
+    
+    color: blue;
 }

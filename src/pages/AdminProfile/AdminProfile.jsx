@@ -27,8 +27,8 @@ export default function AdminProfile() {
     return (
         <div className="profile">
 
-            {isError ? <span>ERROR UPDATE</span> : null}
-            {isLoading ? <span>LOADING</span> : null}
+            {isError ? <span className="profile__alert profile__error">ошибка обновления</span> : null}
+            {isLoading ? <span className="profile__alert profile__loading">... загрузка ...</span> : null}
 
             <form className="profile__form" onSubmit={handlerSubmit}>
                 <input
@@ -57,7 +57,7 @@ export default function AdminProfile() {
                 className="profile__exit"
                 onClick={() =>
                     signout(() =>
-                        navigate(`${process.env.PUBLIC_URL}/login`, {
+                        navigate(`/`, {
                             replace: true,
                         })
                     )
