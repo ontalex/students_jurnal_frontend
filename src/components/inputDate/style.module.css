@@ -2,24 +2,32 @@
     padding: 20px 16px;
     border-radius: 4px;
     box-shadow: 1px 1px 4px #0003;
-    
+
     display: flex;
     align-items: center;
     gap: 16px;
 }
 
 .input {
-    padding: 4px;
+    width: 200px;
+    padding: 12px;
+    border-radius: 16px;
+    font-size: 16px;
     position: absolute;
     visibility: hidden;
     left: -200%;
+    flex: 1 0 0;
+    border: 0px;
 }
 
 @media screen and (min-width: 1024px) {
+    .box {
+        padding: 24px 16px;
+    }
+
     .input {
         position: static;
         visibility: visible;
-        
     }
 }
 
@@ -36,13 +44,28 @@
     height: var(--icon_size);
 }
 
-.icon path
-{
+.icon path {
     fill: black;
 }
 
 .info {
     margin: 0;
     font-family: "Roboto-Regular", Helvetica;
-    font-size: 14px;
+    font-size: 16px;
+}
+
+.btns_date {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.btn_date {
+    padding: 14px 16px;
+    border-radius: 4px;
+    box-shadow: 1px 1px 4px #0003;
+    border: 0px;
+    background-color: #f6f6f6;
+    font-size: 16px;
 }
