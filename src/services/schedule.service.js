@@ -12,6 +12,7 @@ export const getDaySchedule = async (date) => {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            "Authorization": localStorage.getItem("token") || ""
         },
         body: JSON.stringify(body),
     });
