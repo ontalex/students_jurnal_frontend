@@ -5,6 +5,8 @@ import "./User.css";
 
 import React, { useEffect, useState } from "react";
 import { getDaySchedule } from "../../services/schedule.service";
+import PopapLoading from "../../components/PopapLoading/PopapLoading";
+import PopapError from "../../components/PopapError/PopapError";
 
 export default function User() {
     let [date, setDate] = useState(new Date());
@@ -25,8 +27,8 @@ export default function User() {
         <div className="user_page">
             <div className="user_container">
                 <InputDate date={date} changeDate={setDate} />
-                {isLoading && <p className="user__alert user__loading">LOADING</p>}
-                {isError && <p className="user__alert user__error">ERROR</p>}
+                {isLoading && <PopapLoading/>}
+                {isError && <PopapError/>}
                 <div className="user_list">
                     {Boolean(list.length) ? (
                         list.map((item) => {

@@ -1,9 +1,14 @@
+import { useMutation } from "react-query";
 import Lesson from "../../components/LessonAdmin/LessonAdmin";
 import NoneLesson from "../../components/NoneLesson/NoneLesson";
 import InputDate from "../../components/inputDate/InputDate";
 import "./AdminSchedule.css";
 
+import { getDaySchedule } from "../../services/schedule.service";
+
 import React, { useEffect, useState, useMemo } from 'react';
+import PopapError from "../../components/PopapError/PopapError";
+import PopapLoading from "../../components/PopapLoading/PopapLoading";
 
 const AdminSchedule = () => {
 
@@ -33,32 +38,25 @@ const AdminSchedule = () => {
   const memoizedTeachers = useMemo(() => teachers, [teachers]);
   const memoizedLessons = useMemo(() => lessons, [lessons]);
 
+  let requestScheduleDay = useMutation({
+    mutationFn: (date) => getDaySchedule(date),
+    onSuccess: (json) => {
+      let temp = [{}, {}, {}, {}, {}];
+
+      for (let i = 0; i < json.length; i++) {
+        temp[json[i].number - 1] = json[i];
+      }
+
+      setList(temp);
+    }
+  });
+
   useEffect(() => {
     if (!teachers.length || !lessons.length) {
       return;
     }
 
-    let dateJSON = {
-      "date_lesson": date
-    };
-
-    fetch("https://ontalex.ru/alt/api/schedule/day", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dateJSON)
-    }).then(date => date.json()).then(
-      (json) => {
-        let temp = [{}, {}, {}, {}, {}];
-
-        for (let i = 0; i < json.length; i++) {
-          temp[json[i].number - 1] = json[i];
-        }
-
-        setList(temp);
-      }
-    );
+    requestScheduleDay.mutate(date);
 
     return () => { };
 
@@ -72,6 +70,8 @@ const AdminSchedule = () => {
   return (
     <>
       <InputDate date={date} changeDate={changeDate} />
+      {requestScheduleDay.isError && <PopapError/>}
+      {requestScheduleDay.isLoading && <PopapLoading/>}
       <div className="list">
         {
           list.map((lesson, index) => {

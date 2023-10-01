@@ -44,7 +44,7 @@ export default function InputLesson(props) {
               )
             }
 
-          </select>) : <p>Нету данных на день</p>}
+          </select>) : <p className={st.box_select_none}>Нету данных на день</p>}
 
       </label>
     </>

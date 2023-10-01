@@ -15,6 +15,7 @@ import User from "./pages/User/User";
 import { RequireAuth } from "./hoc/RequireAuth";
 import { AuthProvider } from "./hoc/AuthProvider";
 import Start from "./pages/Start/Start";
+import AdminExport from "./pages/AdminExport/AdminExport";
 
 export default function App() {
     
@@ -44,6 +45,7 @@ export default function App() {
                             />
                             <Route path="logbook" element={<AdminLogbook />} />
                             <Route path="profile" element={<AdminProfile />} />
+                            <Route path="export" element={<AdminExport/>} />
                         </Route>
 
                         <Route

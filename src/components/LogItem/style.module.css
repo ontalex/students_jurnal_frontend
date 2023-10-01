@@ -6,42 +6,45 @@
     align-items: center;
     gap: 16px;
 
-    padding: 20px 16px;
+    padding: 6px;
     border-radius: 4px;
     box-shadow: 1px 1px 4px #0003;
     margin-top: 16px;
 
     box-sizing: border-box;
+
+    border: 3px solid #0000;
 }
 
 @media screen and (max-width: 1024px) {
     .log {
         display: flex;
         flex-wrap: wrap;
+        align-content: stretch;
     }
 }
 
 
 .log_n {
-    border-top: 4px solid #c00f
+    border-color: #c00f;
 }
 .log_nb {
-    border-top: 4px solid #0f0f
+    border-color: #0f0f;
 }
 .log_ny {
-    border-top: 4px solid #00ff
+    border-color: #00ff;
 }
 .log_o {
-    border-top: 4px solid #000f
+    border-color: #000f;
 }
 .log_def {
-    border-top: 4px solid #fff0
+    border-color: #fff0;
 }
-
 
 .log_name {
     flex: 1 0 0;
     font-size: 18px;
+    margin-left: 16px;
 }
 
 .log_loading {

@@ -2,7 +2,11 @@ import { useEffect, useMemo } from "react";
 import InputDate from "../../components/inputDate/InputDate";
 import InputLesson from "../../components/inputLesson/InputLesson";
 import LogItem from "../../components/LogItem/LogItem";
-import { useMutation } from "react-query";
+
+import PopapLoading from "../../components/PopapLoading/PopapLoading";
+import PopapError from "../../components/PopapError/PopapError";
+
+import { isError, useMutation } from "react-query";
 import "./AdminLogbook.css";
 
 import React, { useState } from 'react'
@@ -14,9 +18,9 @@ export default function AdminLogbook() {
   let [date, setDate] = useState(() => { return new Date() });
   let [lesson, setLesson] = useState();
 
-  let { mutate, isLoading } = useMutation({
+  let { mutate, isLoading, isError } = useMutation({
     mutationFn: (id) => getLogs(id),
-    onSuccess: (data, variables, context) => {
+    onSuccess: (data) => {
       setLogs(data);
     }
   })
@@ -31,7 +35,10 @@ export default function AdminLogbook() {
     <>
       <InputDate changeDate={setDate} date={date} />
       <InputLesson changeLesson={setLesson} date={date} />
-      {isLoading ? <p>Loading...</p> : null}
+
+      {isLoading && <PopapLoading/>}
+      {isError && <PopapError/>}
+
       <div className="logbook_list">
         {
           Boolean(logs.length) && Boolean(lesson) && !isLoading ?
@@ -46,7 +53,7 @@ export default function AdminLogbook() {
                   key={student.id_student}
                 />
             ) :
-            <p className="logbook_none">Нету данных :(</p>
+            null
         }
       </div>
     </>

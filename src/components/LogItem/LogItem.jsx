@@ -83,7 +83,7 @@ export default function LogItem(props) {
     return (
         <label className={[st.log, choseType()].join(" ")}>
             <p className={st.log_name}>{props.student_name}</p>
-            <div>
+            <div className={st.state_box}>
                 {pushStateQuery.isLoading && (
                     <span className={st.log_loading}>Отправка...</span>
                 )}
