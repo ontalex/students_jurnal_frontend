@@ -1,4 +1,4 @@
-let BASE = "http://localhost:8080/api";
+let BASE = "https://ontalex.ru/alt/api";
 
 export const pushState = async (data) => {
 
@@ -17,9 +17,8 @@ export const pushState = async (data) => {
         body: JSON.stringify(body)
     });
 
-    if (!res.ok) return {status: 'error'}
+    return !res.ok ? {status: "error"} : res.json()
 
-    return res.json()
 }
 
 export const updateLog = async (data) => {
@@ -38,9 +37,7 @@ export const updateLog = async (data) => {
         body: JSON.stringify(body)
     });
 
-    if (!res.ok) return {status: 'error'}
-
-    return res.json()
+    return !res.ok ? {status: "error"} : res.json()
 
 } 
 
@@ -59,7 +56,34 @@ export const getLogs = async (id_lesson) => {
         body: JSON.stringify(body)
     })
 
-    if (!res.ok) return {status: 'error'}
+    return !res.ok ? {status: "error"} : res.json()
 
-    return res.json()
+}
+
+export const deleteLog = async (id_log) => {
+    
+    let res = await fetch(`${BASE}/logbook?id=${id_log}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": localStorage.getItem("token") || ""
+        }
+    })
+
+    return !res.ok ? {status: "error"} : res.json()
+
+}
+
+export const getLog = async (id_log) => {
+    
+    let res = await fetch(`${BASE}/logbook?id=${id_log}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": localStorage.getItem("token") || ""
+        }
+    })
+
+    return !res.ok ? {status: "error"} : res.json()
+
 }

@@ -7,13 +7,6 @@ import Modal from "../Modal/Modal";
 
 export default function NoneLesson(props) {
 
-    useEffect(() => {
-        console.log("Lessons: ", props.lessons);
-        console.log("Teachers: ", props.teachers);
-        console.log("Index: ", props.index);
-        console.log("Date: ", props.date);
-    })
-
     let [open, setOpen] = useState(false);
 
     let handlerSubmit = (e) => {
@@ -29,12 +22,12 @@ export default function NoneLesson(props) {
             number_lesson: props.index + 1,
             name_lesson: e.target.lesson.value, // id_lesson
             fullname_teacher: e.target.teacher.value, // id_teacher
-            room: Number(e.target.room.value)
+            room: e.target.room.value.trim()
         }
 
         console.log(data);
 
-        fetch("http://localhost:8080/api/schedule", {
+        fetch("https://ontalex.ru/alt/api/schedule", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -102,7 +95,7 @@ export default function NoneLesson(props) {
                         </option>
                     </datalist>
 
-                    <input className={st.form_input} type="number" name="room" id="" placeholder="Кабинет" min={100} max={399} />
+                    <input className={st.form_input} type="text" name="room" id="" placeholder="Кабинет" maxLength={7} />
 
                     <button type="submit" className={st.form_btn}>
                         <PluseIcon className={st.form_icon} />

@@ -1,9 +1,14 @@
+import { useMutation } from "react-query";
 import Lesson from "../../components/LessonAdmin/LessonAdmin";
 import NoneLesson from "../../components/NoneLesson/NoneLesson";
 import InputDate from "../../components/inputDate/InputDate";
 import "./AdminSchedule.css";
 
+import { getDaySchedule } from "../../services/schedule.service";
+
 import React, { useEffect, useState, useMemo } from 'react';
+import PopapError from "../../components/PopapError/PopapError";
+import PopapLoading from "../../components/PopapLoading/PopapLoading";
 
 const AdminSchedule = () => {
 
@@ -15,13 +20,13 @@ const AdminSchedule = () => {
 
   useEffect(() => {
     const fetchDateLessons = async () => {
-      const response = await fetch('http://localhost:8080/api/lessons');
+      const response = await fetch('https://ontalex.ru/alt/api/lessons');
       const result = await response.json();
       setLessons(result);
     };
 
     const fetchDateTeachers = async () => {
-      const response = await fetch('http://localhost:8080/api/teachers');
+      const response = await fetch('https://ontalex.ru/alt/api/teachers');
       const result = await response.json();
       setTeachers(result);
     };
@@ -33,32 +38,25 @@ const AdminSchedule = () => {
   const memoizedTeachers = useMemo(() => teachers, [teachers]);
   const memoizedLessons = useMemo(() => lessons, [lessons]);
 
+  let requestScheduleDay = useMutation({
+    mutationFn: (date) => getDaySchedule(date),
+    onSuccess: (json) => {
+      let temp = [{}, {}, {}, {}, {}];
+
+      for (let i = 0; i < json.length; i++) {
+        temp[json[i].number - 1] = json[i];
+      }
+
+      setList(temp);
+    }
+  });
+
   useEffect(() => {
     if (!teachers.length || !lessons.length) {
       return;
     }
 
-    let dateJSON = {
-      "date_lesson": date
-    };
-
-    fetch("http://localhost:8080/api/schedule/day", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dateJSON)
-    }).then(date => date.json()).then(
-      (json) => {
-        let temp = [{}, {}, {}, {}, {}];
-
-        for (let i = 0; i < json.length; i++) {
-          temp[json[i].number - 1] = json[i];
-        }
-
-        setList(temp);
-      }
-    );
+    requestScheduleDay.mutate(date);
 
     return () => { };
 
@@ -67,12 +65,13 @@ const AdminSchedule = () => {
 
   let changeDate = (date) => {
     setDate(date);
-    console.log("Rerender on 'changeDate'");
   };
 
   return (
     <>
       <InputDate date={date} changeDate={changeDate} />
+      {requestScheduleDay.isError && <PopapError/>}
+      {requestScheduleDay.isLoading && <PopapLoading/>}
       <div className="list">
         {
           list.map((lesson, index) => {
