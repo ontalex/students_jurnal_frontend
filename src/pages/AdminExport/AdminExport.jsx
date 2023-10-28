@@ -114,9 +114,9 @@ export default function AdminExport() {
                                         </th>
                                     ))}
                                     <th rowSpan={3}>Опозд.</th>
-                                    <th rowSpan={3}>НП</th>
                                     <th rowSpan={3}>УП</th>
-                                    <th rowSpan={3}>БП</th>
+                                    <th rowSpan={3}>НП</th>
+                                    <th rowSpan={3}>ОБ</th>
                                     <th rowSpan={3}>ВСЕГО Академ Часов</th>
                                 </tr>
                                 <tr>
@@ -142,8 +142,8 @@ export default function AdminExport() {
                                             <td>{item || " "}</td>
                                         ))}
                                         <td>{item.total.delays}</td>
-                                        <td>{item.total.disrespectful}</td>
                                         <td>{item.total.respectfully}</td>
+                                        <td>{item.total.disrespectful}</td>
                                         <td>{item.total.disease}</td>
                                         <td>
                                             {item.total.respectfully +
