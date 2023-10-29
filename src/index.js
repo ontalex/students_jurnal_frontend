@@ -9,9 +9,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 const client = new QueryClient();
 
 root.render(
-    <React.StrictMode>
+    <React.Fragment>
         <QueryClientProvider client={client}>
             <App/>
         </QueryClientProvider>
-    </React.StrictMode>
+    </React.Fragment>
 );

@@ -45,7 +45,7 @@ export default function Login() {
                     <h1>Вход</h1>
 
                     {error ? (
-                        <span class={st.login_error}>Ошибка логина\пароля</span>
+                        <span className={st.login_error}>Ошибка логина\пароля</span>
                     ) : null}
 
                     <form
