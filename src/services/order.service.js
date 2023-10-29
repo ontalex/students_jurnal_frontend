@@ -1,7 +1,14 @@
 let BASE = "https://ontalex.ru/alt/api";
 
-export let getPeriodReport = async (body) => {
-        let res = await fetch(`${BASE}/order`, {
+
+/**
+ * 
+ * @param {Object} body Тело запроса, передаваемое на сервервер
+ * @param {String} typeOrder Необходимы тип отчёта (min\...)
+ * @returns 
+ */
+export let getPeriodReport = async (body, typeOrder) => {
+        let res = await fetch(`${BASE}/${typeOrder === "min" ? "min" : ""}order`, {
                 method: "POST",
                 headers: {
                         "Content-Type": "application/json",
