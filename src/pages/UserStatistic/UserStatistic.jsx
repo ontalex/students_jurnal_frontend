@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import InputDate from '../../components/InputDate/InputDate';
-import { GridStatisticLogs } from '../../components/GridStatisticLogs/GridStatisticLogs';
 import { useMutation } from "react-query";
 import st from "./style.module.css";
 import { getCountLessons } from '../../services/stutistic.service';

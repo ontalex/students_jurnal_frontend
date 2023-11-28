@@ -9,7 +9,6 @@ import AdminHome from "./pages/AdminHome/AdminHome";
 import AdminSchedule from "./pages/AdminSchedule/AdminSchedule";
 import AdminLogbook from "./pages/AdminLogbook/AdminLogbook";
 import AdminProfile from "./pages/AdminProfile/AdminProfile";
-import { AdminStatistic } from "./pages/AdminStatistic/AdminStatistic";
 import Login from "./pages/Login/Login";
 import UserHome from "./pages/UserHome/UserHome";
 import User from "./pages/User/User";
@@ -49,7 +48,6 @@ export default function App() {
                             <Route path="logbook" element={<AdminLogbook />} />
                             <Route path="profile" element={<AdminProfile />} />
                             <Route path="export" element={<AdminExport/>} />
-                            <Route path="stat" element={<AdminStatistic/>} />
                         </Route>
 
                         <Route
