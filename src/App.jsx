@@ -9,13 +9,16 @@ import AdminHome from "./pages/AdminHome/AdminHome";
 import AdminSchedule from "./pages/AdminSchedule/AdminSchedule";
 import AdminLogbook from "./pages/AdminLogbook/AdminLogbook";
 import AdminProfile from "./pages/AdminProfile/AdminProfile";
+import { AdminStatistic } from "./pages/AdminStatistic/AdminStatistic";
 import Login from "./pages/Login/Login";
+import UserHome from "./pages/UserHome/UserHome";
 import User from "./pages/User/User";
 
 import { RequireAuth } from "./hoc/RequireAuth";
 import { AuthProvider } from "./hoc/AuthProvider";
 import Start from "./pages/Start/Start";
 import AdminExport from "./pages/AdminExport/AdminExport";
+import { UserStatistic } from "./pages/UserStatistic/UserStatistic";
 
 export default function App() {
     
@@ -46,6 +49,7 @@ export default function App() {
                             <Route path="logbook" element={<AdminLogbook />} />
                             <Route path="profile" element={<AdminProfile />} />
                             <Route path="export" element={<AdminExport/>} />
+                            <Route path="stat" element={<AdminStatistic/>} />
                         </Route>
 
                         <Route
@@ -56,7 +60,13 @@ export default function App() {
                         <Route
                             path={`user`}
                             element={<User />}
-                        />
+                        >
+                            <Route index element={<UserHome/>} />
+                            <Route
+                                path={"statistic"}
+                                element={<UserStatistic/>}
+                            />
+                        </Route>
                     </Routes>
                 </AuthProvider>
             </BrowserRouter>

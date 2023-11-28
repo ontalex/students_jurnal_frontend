@@ -1,0 +1,21 @@
+.btn {
+    width: 100%;
+    border-radius: 6px;
+    background-color: #a667e1;
+    padding: 18px 16px;
+    border: 0px;
+
+    color: #ffffff;
+    font-family: "Roboto-Regular", Helvetica;
+    font-size: 18px;
+    font-weight: 400;
+
+    transition: background-color 0.3s ease;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 20px;
+}

@@ -10,7 +10,7 @@ const Admin = () => {
         <div className="container">
             <Outlet/>
         </div>
-        <Menu/>
+        <Menu type="admin"/>
     </div>
   )
 }

@@ -1,0 +1,42 @@
+:root {
+    --radius-item: 8px;
+}
+
+.grid_lessons {
+}
+
+.lesson_data {
+        width: 100%;
+        display: table;
+    border-radius: var(--radius-item);
+    overflow: hidden;
+    background-color: rgb(233 233 233 / 43%);
+}
+
+.lesson_col, .lesson_name {
+    display: table-row;
+}
+
+.lesson_name p,
+.lesson_col p {
+    display: table-cell;
+}
+
+.col_header {
+    background-color: mediumslateblue;
+    color: white;
+    font-weight: bold;
+    margin: 0;
+
+    padding: 12px;
+}
+
+.col_value {
+    color: #333;
+    padding: 12px;
+    font-size: 1.1rem;
+
+    background-color: #fcfcfc;
+}
+
+

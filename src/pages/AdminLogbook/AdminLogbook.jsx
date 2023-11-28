@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
-import InputDate from "../../components/inputDate/InputDate";
-import InputLesson from "../../components/inputLesson/InputLesson";
+import InputDate from "../../components/InputDate/InputDate";
+import InputLesson from "../../components/InputLesson/InputLesson";
 import LogItem from "../../components/LogItem/LogItem";
 
 import PopapLoading from "../../components/PopapLoading/PopapLoading";

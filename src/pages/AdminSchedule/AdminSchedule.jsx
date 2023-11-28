@@ -1,7 +1,7 @@
 import { useMutation } from "react-query";
 import Lesson from "../../components/LessonAdmin/LessonAdmin";
 import NoneLesson from "../../components/NoneLesson/NoneLesson";
-import InputDate from "../../components/inputDate/InputDate";
+import InputDate from "../../components/InputDate/InputDate";
 import "./AdminSchedule.css";
 
 import { getDaySchedule } from "../../services/schedule.service";

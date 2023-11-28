@@ -1,11 +1,28 @@
+.date_box {
+    display: flex;
+    align-items: stretch;
+
+    margin: 16px 0;
+    gap: 16px;
+}
+
+.date_info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .box {
     padding: 20px 16px;
     border-radius: 4px;
     box-shadow: 1px 1px 4px #0003;
-
+    
     display: flex;
     align-items: center;
-    gap: 16px;
+    flex-direction: column;
+    gap: 2px;
+
+    width: 100%;
 }
 
 .input {
@@ -20,9 +37,11 @@
     border: 0px;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 640px) {
     .box {
         padding: 24px 16px;
+        flex-direction: row;
+        gap: 16px;
     }
 
     .input {
@@ -68,4 +87,18 @@
     border: 0px;
     background-color: #f6f6f6;
     font-size: 16px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon_btn {
+    --size_btn: 20px;
+    width: var(--size_btn);
+    height: var(--size_btn);
+}
+
+.icon_btn_left {
+    rotate: -180deg;
 }
