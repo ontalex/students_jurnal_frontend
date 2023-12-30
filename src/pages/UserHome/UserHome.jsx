@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import { getDaySchedule } from "../../services/schedule.service";
 import PopapLoading from "../../components/PopapLoading/PopapLoading";
 import PopapError from "../../components/PopapError/PopapError";
-import "./UserHome.css";
+import useFormateLessons from "../../hooks/useFormateLessons.js";
 
 export default function UserHome() {
     let [date, setDate] = useState(new Date());
@@ -17,26 +17,27 @@ export default function UserHome() {
 
     let { mutate, isLoading, isError } = useMutation({
         mutationFn: (data) => getDaySchedule(data),
-        onSettled: (json) => {
-            console.clear();
-            console.log(json);
-            setList(json);
-        },
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        onSettled: (json) => useFormateLessons(json, setList)
     });
     return (
         <>
             <InputDate date={date} changeDate={setDate} />
+
             {isLoading && <PopapLoading />}
             {isError && <PopapError />}
+            
             <div className="user_list">
-                {Boolean(list.length) ? (
-                    list.map((item) => {
-                        return <Lesson lesson={item} />;
+            
+                {          
+                    list.map((lesson, index) => {
+                        
+                        return <Lesson lesson={lesson} numberLesson={index + 1} />
                     })
-                ) : (
-                    <p className="user_none">Нету пар</p>
-                )}
+                }
+
             </div>
+
         </>
     )
 

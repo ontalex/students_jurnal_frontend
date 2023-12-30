@@ -2,9 +2,9 @@ import React, { useCallback, useEffect } from "react";
 
 import st from "./style.module.css";
 
-export default function Lesson({ lesson }) {
+export default function Lesson({ lesson, numberLesson }) {
     let switchTimeLesson = useCallback(() => {
-        switch (lesson.number) {
+        switch (lesson.number || numberLesson) {
             case 1:
                 return "9:00 - 10:30";
                 break;
@@ -29,16 +29,28 @@ export default function Lesson({ lesson }) {
 
     return (
         <div className={st.lesson}>
+
             <div className={st.lesson_about}>
-                <p className={st.lesson_number}>Пара #{lesson.number}</p>
+                <p className={st.lesson_number}>Пара №{lesson.number || numberLesson}</p>
                 <p className={st.lesson_time}>{switchTimeLesson()}</p>
             </div>
 
             <div className={st.info}>
-                <h2 className={st.info_lesson}>{lesson.name_lesson}</h2>
-                <p className={st.info_teacher}>{lesson.teacher}</p>
-                <p className={st.info_room}>Аудитория: {lesson.room}</p>
+                {
+                    Boolean(lesson?.name_lesson) ?
+                        <>
+
+                            <h2 className={st.info_lesson}>{lesson.name_lesson}</h2>
+                            <p className={st.info_teacher}>{lesson.teacher}</p>
+                            <p className={st.info_room}>Аудитория: {lesson.room}</p>
+
+                        </> :
+                        <>
+                            <p className={st.none_lesson}>Нету пары</p>
+                        </>
+                }
             </div>
-        </div>
+
+        </div >
     );
 }

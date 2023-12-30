@@ -13,11 +13,11 @@
 .lesson_about {
     display: flex;
     align-items: center;
-    justify-content: left;
+    justify-content: space-between;
     gap: 16px;
 
     color: white;
-    background-color: #A667E1;
+    background-color: #8c50c4;
     padding: 12px 20px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -25,6 +25,7 @@
 
 }
 .lesson_number {
+    
     margin: 0px;
     font-weight: bold;
 }
@@ -55,4 +56,8 @@
 
 .lesson_icon {
     height: 72px;
+}
+
+.none_lesson {
+    margin: 0 auto;
 }

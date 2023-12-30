@@ -9,6 +9,7 @@ import { getDaySchedule } from "../../services/schedule.service";
 import React, { useEffect, useState, useMemo } from 'react';
 import PopapError from "../../components/PopapError/PopapError";
 import PopapLoading from "../../components/PopapLoading/PopapLoading";
+import useFormateLessons from "../../hooks/useFormateLessons.js";
 
 const AdminSchedule = () => {
 
@@ -40,15 +41,8 @@ const AdminSchedule = () => {
 
   let requestScheduleDay = useMutation({
     mutationFn: (date) => getDaySchedule(date),
-    onSuccess: (json) => {
-      let temp = [{}, {}, {}, {}, {}];
-
-      for (let i = 0; i < json.length; i++) {
-        temp[json[i].number - 1] = json[i];
-      }
-
-      setList(temp);
-    }
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    onSuccess: (json) => useFormateLessons(json, setList)
   });
 
   useEffect(() => {
