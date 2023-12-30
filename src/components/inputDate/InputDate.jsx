@@ -5,7 +5,7 @@ import { ReactComponent as CaretRight } from "../../pic/caret_right.svg";
 
 import React, { useRef } from "react";
 
-export default function InputDate({ changeDate, date }) {
+export default function InputDate ({ changeDate, date }) {
 
     let inputRef = useRef();
 

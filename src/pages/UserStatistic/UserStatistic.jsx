@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import InputDate from '../../components/InputDate/InputDate';
+import InputDate from '../../components/inputDate/InputDate.jsx';
 import { useMutation } from "react-query";
 import st from "./style.module.css";
 import { getCountLessons } from '../../services/stutistic.service';

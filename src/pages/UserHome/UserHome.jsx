@@ -1,6 +1,6 @@
 import { useMutation } from "react-query";
 import Lesson from "../../components/LessonUser/LessonUser";
-import InputDate from "../../components/InputDate/InputDate";
+import InputDate from "../../components/inputDate/InputDate.jsx";
 import "./UserHome.css";
 
 import React, { useEffect, useState } from "react";

@@ -4,7 +4,7 @@ import st from "./style.module.css";
 import { useMutation } from 'react-query';
 import { getDaySchedule } from '../../services/schedule.service';
 
-export default function InputLesson(props) {
+export default function InputLesson (props) {
 
   let [schedule, setSchedule] = useState([]);
 
