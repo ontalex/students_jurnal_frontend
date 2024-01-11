@@ -7,10 +7,9 @@ import "./Menu.css";
 import { ReactComponent as Home_icon } from "../../pic/home_icon.svg";
 import { ReactComponent as Notebook_icon } from "../../pic/notebook_icon.svg";
 import { ReactComponent as Calendar_icon } from "../../pic/calendar_icon.svg";
-import { ReactComponent as Profile_icon } from "../../pic/profile_icon.svg";
-import { ReactComponent as Export_icon } from "../../pic/export_icon.svg";
 import { ReactComponent as Statistic_icon } from "../../pic/bar_shart.svg";
 import { ReactComponent as Logout_icon } from "../../pic/logout_icon.svg";
+import { ReactComponent as Menu_icon } from "../../pic/menu_icon.svg";
 
 import React from "react";
 
@@ -53,25 +52,15 @@ export const Menu = ({ type }) => {
                 </NavLink>
 
                 <NavLink
-                    to={`profile`}
+                    to={"menu"}
                     className={({ isActive }) =>
                         isActive ? "menu__link menu__link--active" : "menu__link"
                     }
                 >
-                    <Profile_icon className="menu__icon" />
-                    <span className="menu__name">Профиль</span>
+                    <Menu_icon className="menu__icon" />
+                    <span className="menu__name">Меню</span>
                 </NavLink>
 
-                <NavLink
-                    to={`export`}
-                    className={({ isActive }) =>
-                        isActive ? "menu__link menu__link--active" : "menu__link"
-                    }
-                >
-                    <Export_icon className="menu__icon" />
-                    <span className="menu__name">Отчёт</span>
-                </NavLink>
-                
                 <NavLink 
                     to={"/"}
                     className={({ isPending }) =>
