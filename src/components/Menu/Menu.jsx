@@ -1,4 +1,6 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+
+import { useAuth } from "../../hooks/useAuth";
 
 import "./Menu.css";
 
@@ -13,6 +15,10 @@ import { ReactComponent as Logout_icon } from "../../pic/logout_icon.svg";
 import React from "react";
 
 export const Menu = ({ type }) => {
+
+    const { signout } = useAuth();
+    let navigate = useNavigate();
+
     return (
         <nav className="menu">
             <NavLink
@@ -64,6 +70,23 @@ export const Menu = ({ type }) => {
                 >
                     <Export_icon className="menu__icon" />
                     <span className="menu__name">Отчёт</span>
+                </NavLink>
+                
+                <NavLink 
+                    to={"/"}
+                    className={({ isPending }) =>
+                        isPending ? "menu__link menu__link--active" : "menu__link"
+                    }
+                    onClick={() =>
+                        signout(() =>
+                            navigate(`/`, {
+                                replace: true,
+                            })
+                        )
+                    }
+                >
+                    <Logout_icon className="menu__icon" />
+                    <span className="menu__name">Выйти</span>
                 </NavLink>
             </>}
 
