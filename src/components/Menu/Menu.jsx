@@ -8,6 +8,7 @@ import { ReactComponent as Calendar_icon } from "../../pic/calendar_icon.svg";
 import { ReactComponent as Profile_icon } from "../../pic/profile_icon.svg";
 import { ReactComponent as Export_icon } from "../../pic/export_icon.svg";
 import { ReactComponent as Statistic_icon } from "../../pic/bar_shart.svg";
+import { ReactComponent as Logout_icon } from "../../pic/logout_icon.svg";
 
 import React from "react";
 
@@ -75,6 +76,15 @@ export const Menu = ({ type }) => {
                 >
                     <Statistic_icon className="menu__icon" />
                     <span className="menu__name">Статистика</span>
+                </NavLink>
+                <NavLink 
+                    to={"/"}
+                    className={({ isPending }) =>
+                        isPending ? "menu__link menu__link--active" : "menu__link"
+                    }
+                >
+                    <Logout_icon className="menu__icon" />
+                    <span className="menu__name">Выйти</span>
                 </NavLink>
             </>}
         </nav>
