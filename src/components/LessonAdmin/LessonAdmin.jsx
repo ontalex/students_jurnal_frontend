@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import st from "./style.module.css";
 
@@ -18,11 +18,12 @@ export default function Lesson(props) {
         console.log("Date: ", props.date);
     })
 
-    let [open, setOpen] = useState(false);
+    let [openUpdate, setOpenUpdate] = useState(false);
+    let [openDelete, setOpenDelete] = useState(false);
 
     let handlerDelete = (e) => {
 
-        fetch(`https://ontalex.ru/alt/api/schedule?id=${props.lesson.id_schedule}`,{
+        fetch(`https://ontalex.ru/alt/api/schedule?id=${props.lesson.id_schedule}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -46,9 +47,9 @@ export default function Lesson(props) {
 
 
         let data = {
-            id_schedule: props.lesson.id_schedule, 
+            id_schedule: props.lesson.id_schedule,
             name_lesson: e.target.lesson.value,
-            room: e.target.room.value.trim(), 
+            room: e.target.room.value.trim(),
             fullname_teacher: e.target.teacher.value
         }
 
@@ -74,7 +75,7 @@ export default function Lesson(props) {
 
                     props.changeDate(new Date(props.date));
 
-                    setOpen(false);
+                    setOpenUpdate(false);
                 }
             )
             .catch(
@@ -95,16 +96,17 @@ export default function Lesson(props) {
                     <p className={st.info_room}>Аудитория: {props.lesson.room}</p>
                 </div>
 
-                <button className={st.btn} onClick={() => setOpen(true)}>
+                <button className={st.btn} onClick={() => setOpenUpdate(true)}>
                     <EditIcon className={st.icon} />
                 </button>
 
-                <button className={st.btn} onClick={handlerDelete}>
+                <button className={st.btn} onClick={() => setOpenDelete(true)}>
                     <DeleteIcon className={st.icon} />
                 </button>
 
             </div>
-            <Modal open={open} onClose={() => setOpen(false)}>
+
+            <Modal open={openUpdate} onClose={() => setOpenUpdate(false)}>
 
                 <h2 className={st.modal_header}>Изменить пару</h2>
                 <form action="" onSubmit={handlerSubmit} className={st.form}>
@@ -144,6 +146,17 @@ export default function Lesson(props) {
 
                 </form>
 
+            </Modal>
+
+            <Modal open={openDelete} onClose={() => setOpenDelete(false)}>
+                <h2 className={st.modal_header}>Вы действильно хотите удалить пару?</h2>
+
+                <p className={st.modal_desc}>Это вызовет удаление связанных отметок посещаемости</p>
+
+                <button className={[st.form_btn, st.delete_button].join(" ")} onClick={handlerDelete}>
+                    <DeleteIcon className={st.icon} />
+                    <span className={st.form_span}>Удалить</span>
+                </button>
             </Modal>
         </>
     )

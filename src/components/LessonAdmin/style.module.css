@@ -57,6 +57,10 @@
     margin: 16px 0px;
 }
 
+.modal_desc {
+    font-size: 16px;
+}
+
 .form {
     display: grid;
     gap: 16px;
@@ -114,4 +118,8 @@
     color: #fff;
     font-family: "Roboto-Regular", Helvetica;
     font-size: 16px;
+}
+
+.delete_button {
+    width: 100%;
 }
