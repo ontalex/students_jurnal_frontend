@@ -9,10 +9,30 @@ import {
 } from "../../services/logbook.service";
 
 export default function LogItem(props) {
+
+    let choseType = (logType) => {
+        switch (logType.trim()) {
+            case "н":
+                return st.log_n;
+            case "нб":
+                return st.log_nb;
+            case "ну":
+                return st.log_ny;
+            case "о":
+                return st.log_o;
+            default:
+                return st.log_def;
+        }
+    };
+
+    let [styleLog, setStyleLog] = useState([st.log, choseType(props.log_state)].join(" "));
+
     let [log, setLog] = useState({
         id: props.id_log,
         type: props.log_state,
     });
+
+    
 
     let pushStateQuery = useMutation({
         mutationFn: (data) => pushState(data),
@@ -21,6 +41,7 @@ export default function LogItem(props) {
                 id: data[0].id_log,
                 type: data[0].type_log,
             });
+            setStyleLog(() => [st.log, choseType(vars.type_log)].join(" "));
         },
     });
 
@@ -31,6 +52,7 @@ export default function LogItem(props) {
                 id: data[0]?.id_log || log.id,
                 type: data[0]?.type_log || log.type,
             });
+            setStyleLog(() => [st.log, choseType(vars.type_log)].join(" "));
         },
     });
 
@@ -41,6 +63,7 @@ export default function LogItem(props) {
                 ...log,
                 type: undefined,
             });
+            setStyleLog(() => [st.log, choseType('')].join(" "));
         },
     });
 
@@ -65,23 +88,10 @@ export default function LogItem(props) {
         console.groupEnd();
     };
 
-    let choseType = () => {
-        switch (log.type) {
-            case "н":
-                return st.log_n;
-            case "нб":
-                return st.log_nb;
-            case "ну":
-                return st.log_ny;
-            case "о":
-                return st.log_o;
-            default:
-                return st.log_def;
-        }
-    };
+    
 
     return (
-        <label className={[st.log, choseType()].join(" ")}>
+        <label className={styleLog}>
             <p className={st.log_name}>{props.student_name}</p>
             <div className={st.state_box}>
                 {pushStateQuery.isLoading && (
