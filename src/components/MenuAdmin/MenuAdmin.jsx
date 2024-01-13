@@ -42,6 +42,13 @@ export const MenuAdmin = () => {
                             >
                                 <span>Профиль</span>
                             </NavLink>
+                            <NavLink 
+                                to={"export"}
+                                className="submenu__link"
+                                onClick={() => setOpenMenu(false)}
+                            >
+                                <span>Создать отчёт</span>
+                            </NavLink>
                         </div>
 
                 </div>
