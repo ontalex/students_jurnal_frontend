@@ -1,8 +1,9 @@
 import { Outlet } from "react-router-dom";
 import "./Admin.css";
 
-import React from 'react'
-import { Menu } from "../../components/Menu/Menu";
+import React from 'react';
+
+import { MenuAdmin } from "../../components/MenuAdmin/MenuAdmin";
 
 const Admin = () => {
   return (
@@ -10,7 +11,7 @@ const Admin = () => {
         <div className="container">
             <Outlet/>
         </div>
-        <Menu type="admin"/>
+        <MenuAdmin />
     </div>
   )
 }

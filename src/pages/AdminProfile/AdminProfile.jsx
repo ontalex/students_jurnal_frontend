@@ -53,19 +53,6 @@ export default function AdminProfile() {
                 <button className="profile__change"><span>Сменить</span></button>
             </form>
 
-            <button
-                className="profile__exit"
-                onClick={() =>
-                    signout(() =>
-                        navigate(`/`, {
-                            replace: true,
-                        })
-                    )
-                }
-            >
-                <LogoutIcon className="exit__icon"/>
-                <span className="exit__span">Выход</span>
-            </button>
         </div>
     );
 }
