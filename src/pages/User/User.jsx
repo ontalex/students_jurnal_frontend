@@ -1,8 +1,8 @@
 import "./User.css";
 
 import React from "react";
-import { Menu } from "../../components/Menu/Menu";
 import { Outlet } from "react-router-dom";
+import { MenuUser } from "../../components/MenuUser/MenuUser";
 
 export default function User() {
     return (
@@ -10,7 +10,7 @@ export default function User() {
             <div className="user_container">
                 <Outlet/>
             </div>
-            <Menu type="user" />
+            <MenuUser />
         </div>
     );
 }
