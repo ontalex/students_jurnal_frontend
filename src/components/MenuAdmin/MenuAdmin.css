@@ -60,7 +60,12 @@
 
 
 
-.submenu {}
+.submenu {
+    width: 70svw;
+    min-width: max-content;
+    max-width: 400px;
+}
+
 .submenu__header {
     text-align: center;
 }
