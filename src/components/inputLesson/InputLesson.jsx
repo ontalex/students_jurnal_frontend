@@ -14,6 +14,7 @@ export default function InputLesson (props) {
       console.table(data);
       setSchedule(data);
       props.changeLesson(data[0]?.id_schedule || null);
+      console.log(data[0]);
     }
   })
 

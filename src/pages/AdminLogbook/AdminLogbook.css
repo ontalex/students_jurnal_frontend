@@ -6,3 +6,32 @@
 .logbook_header {
     text-align: center;
 }
+
+.logbook__share__btn {
+    border-radius: 4px;
+
+    margin: 20px 0;
+    padding: 12px 24px;
+
+    font-size: 16px;
+    color: white;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #A667E1;
+
+    transition: background-color .3s ease;
+
+    border: 0px;
+}
+
+.logbook__share {
+    display: flex;
+    gap: 16px;
+    padding: 14px;
+    box-shadow: 0px 0px 4px #aaa;
+    border-radius: 6px;
+    margin: 20px 0;
+}
