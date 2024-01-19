@@ -108,21 +108,22 @@ export default function AdminExport() {
             {Boolean(data.students) ? (
                 <>
                     <React.Suspense fallback={<PopapLoading />}>
-                        <div className="export_container">
-                            <table cellSpacing={0} border={2} ref={refTable}>
-                                {type == "min" ? (
-                                    <MinOrder orderReq={data} />
-                                ) : (
-                                    <MaxOrder orderReq={data} />
-                                )}
-                            </table>
-                        </div>
                         <button
                             className="export_getReq"
                             onClick={() => getFile(refTable.current.innerHTML)}
                         >
                             Скачать XLS
                         </button>
+                        <div className="export_container">
+                            <table cellSpacing={0} ref={refTable}>
+                                {type === "min" ? (
+                                    <MinOrder orderReq={data} />
+                                ) : (
+                                    <MaxOrder orderReq={data} />
+                                )}
+                            </table>
+                        </div>
+
                     </React.Suspense>
                 </>
             ) : (
