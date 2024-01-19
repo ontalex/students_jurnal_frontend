@@ -18,6 +18,7 @@ import { AuthProvider } from "./hoc/AuthProvider";
 import Start from "./pages/Start/Start";
 import AdminExport from "./pages/AdminExport/AdminExport";
 import { UserStatistic } from "./pages/UserStatistic/UserStatistic";
+import { Share } from "./pages/Share/Share";
 
 export default function App() {
     
@@ -65,6 +66,11 @@ export default function App() {
                                 element={<UserStatistic/>}
                             />
                         </Route>
+
+                        <Route
+                            path="/share/logbook/:short_token"
+                            element={<Share/>}
+                        />
                     </Routes>
                 </AuthProvider>
             </BrowserRouter>

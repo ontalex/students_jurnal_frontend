@@ -1,4 +1,4 @@
-let BASE = "https://ontalex.ru/alt/api";
+export let BASE = "https://ontalex.ru/alt/api";
 
 export let auth = async ({ login, password }) => {
 
