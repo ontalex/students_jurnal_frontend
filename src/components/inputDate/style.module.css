@@ -23,6 +23,16 @@
     gap: 2px;
 
     width: 100%;
+
+    background-color: white;
+
+    transition-property: background-color;
+    transition-timing-function: ease;
+    transition-duration: 0.2s;
+}
+
+.box:hover {
+    background-color: #f6f6f6;
 }
 
 .input {
@@ -85,12 +95,21 @@
     border-radius: 4px;
     box-shadow: 1px 1px 4px #0003;
     border: 0px;
-    background-color: #f6f6f6;
+
+    background-color: white;
     font-size: 16px;
 
     display: flex;
     justify-content: center;
     align-items: center;
+
+    transition-property: background-color;
+    transition-timing-function: ease;
+    transition-duration: 0.2s;
+}
+
+.btn_date:hover {
+    background-color: #f6f6f6;
 }
 
 .icon_btn {

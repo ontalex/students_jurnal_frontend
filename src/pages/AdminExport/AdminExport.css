@@ -56,6 +56,8 @@ th {
     align-items: center;
     /* gap: 16px; */
     margin-bottom: 10px;
+
+    background-color: white;
 }
 
 .export__box span {
@@ -71,6 +73,8 @@ th {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 10px;
+
+    background-color: white;
 }
 
 .export__check {
@@ -119,4 +123,20 @@ th {
     font-size: 16px;
     border: 0px;
     box-sizing: border-box;
+    background-color: #f6f6f6;
+}
+
+
+.export_container {
+    padding: 32px 16px;
+    background-color: white;
+}
+
+.export_container table {
+    border: 1px solid #000;
+    background-color: white;
+}
+
+.export_container td {
+    border: 1px solid #000;
 }
