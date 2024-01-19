@@ -80,7 +80,7 @@ export default function AdminLogbook() {
         logsMutation.isSuccess &&
         <div className="logbook__share">
           <YandexShare link={share} />
-          <a href={share}>Выписка логов</a>
+          <a href={share}>Список посещаемости</a>
         </div>
       }
 
