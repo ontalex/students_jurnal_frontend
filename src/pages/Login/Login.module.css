@@ -10,6 +10,10 @@
 
     display: flex;
     align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+    gap: 24px;
 
 }
 
@@ -46,6 +50,27 @@
     font-family: sans-serif;
     text-transform: capitalize;
     text-align: center;
+}
+
+.link_main {
+
+    display: flex;
+    align-items: center;
+
+    box-shadow: 1px 1px 9px #2222222c;
+
+    padding: 4px 24px;
+    margin: 0px auto;
+    
+    border-radius: 6px;
+
+    text-decoration: none;
+    color: #000;
+    
+}
+
+.link_main_icon {
+    rotate: 180deg;
 }
 
 .form {

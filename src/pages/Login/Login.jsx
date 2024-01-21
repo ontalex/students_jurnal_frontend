@@ -1,8 +1,10 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import st from "./Login.module.css";
 
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
+
+import { ReactComponent as IconCaret } from "../../pic/caret_right.svg";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -81,6 +83,10 @@ export default function Login() {
                         </button>
                     </form>
                 </div>
+                <Link to={"/"} className={st.link_main}>
+                    <IconCaret className={st.link_main_icon}/>
+                    <p>На главную</p>
+                </Link>
             </div>
         </>
     );
