@@ -6,11 +6,13 @@ import { MenuUser } from "../../components/MenuUser/MenuUser";
 
 export default function User() {
     return (
-        <div className="user_page">
-            <div className="user_container">
-                <Outlet/>
+        <>
+            <div className="user_page">
+                <div className="user_container">
+                    <Outlet />
+                </div>
             </div>
             <MenuUser />
-        </div>
+        </>
     );
 }

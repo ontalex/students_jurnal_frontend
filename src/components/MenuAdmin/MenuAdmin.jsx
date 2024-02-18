@@ -33,76 +33,81 @@ export const MenuAdmin = () => {
 
                 <div className="submenu">
 
-                        <h2 className="submenu__header">Меню</h2>
-                        <div className="submenu__links">
-                            <NavLink 
-                                to={"profile"}
-                                className="submenu__link"
-                                onClick={() => setOpenMenu(false)}
-                            >
-                                <span>Профиль</span>
-                            </NavLink>
-                            <NavLink 
-                                to={"export"}
-                                className="submenu__link"
-                                onClick={() => setOpenMenu(false)}
-                            >
-                                <span>Создать отчёт</span>
-                            </NavLink>
-                        </div>
+                    <h2 className="submenu__header">Меню</h2>
+                    <div className="submenu__links">
+                        <NavLink
+                            to={"profile"}
+                            className="submenu__link"
+                            onClick={() => setOpenMenu(false)}
+                        >
+                            <span>Профиль</span>
+                        </NavLink>
+                        <NavLink
+                            to={"export"}
+                            className="submenu__link"
+                            onClick={() => setOpenMenu(false)}
+                        >
+                            <span>Создать отчёт</span>
+                        </NavLink>
+                    </div>
 
                 </div>
 
             </Modal>
-            <nav className="menu">
-                <NavLink
-                    to={``}
-                    className={({ isPending }) =>
-                        isPending ? "menu__link menu__link--active" : "menu__link"
-                    }
-                >
-                    <Home_icon className="menu__icon" />
-                    <span className="menu__name">Главная</span>
-                </NavLink>
+            <nav className="menu__admin">
 
-                <NavLink
-                    to={`schedule`}
-                    className={({ isActive }) =>
-                        isActive ? "menu__link menu__link--active" : "menu__link"
-                    }
-                >
-                    <Notebook_icon className="menu__icon" />
-                    <span className="menu__name">Пары</span>
-                </NavLink>
+                <div className="menu__section">
+                    <NavLink
+                        to={``}
+                        className={({ isPending }) =>
+                            isPending ? "menu__admin__link menu__admin__link--active" : "menu__admin__link"
+                        }
+                    >
+                        <Home_icon className="menu__admin__icon" />
+                        <span className="menu__admin__name">Главная</span>
+                    </NavLink>
 
-                <NavLink
-                    to={`logbook`}
-                    className={({ isActive }) =>
-                        isActive ? "menu__link menu__link--active" : "menu__link"
-                    }
-                >
-                    <Calendar_icon className="menu__icon" />
-                    <span className="menu__name">Учёт</span>
-                </NavLink>
+                    <NavLink
+                        to={`schedule`}
+                        className={({ isActive }) =>
+                            isActive ? "menu__admin__link menu__admin__link--active" : "menu__admin__link"
+                        }
+                    >
+                        <Notebook_icon className="menu__admin__icon" />
+                        <span className="menu__admin__name">Пары</span>
+                    </NavLink>
 
-                <button
-                    className="menu__link"
-                    onClick={() => setOpenMenu(true)}
-                >
-                    <Menu_icon className="menu__icon" />
-                    <span className="menu__name">Меню</span>
-                </button>
+                    <NavLink
+                        to={`logbook`}
+                        className={({ isActive }) =>
+                            isActive ? "menu__admin__link menu__admin__link--active" : "menu__admin__link"
+                        }
+                    >
+                        <Calendar_icon className="menu__admin__icon" />
+                        <span className="menu__admin__name">Учёт</span>
+                    </NavLink>
+                </div>
 
-                <NavLink
-                    to={"/"}
-                    className={({ isPending }) =>
-                        isPending ? "menu__link menu__link--active" : "menu__link"
-                    }
-                    onClick={logout}
-                >
-                    <Logout_icon className="menu__icon" />
-                    <span className="menu__name">Выйти</span>
-                </NavLink>
+                <div className="menu__section">
+                    <button
+                        className="menu__admin__link"
+                        onClick={() => setOpenMenu(true)}
+                    >
+                        <Menu_icon className="menu__admin__icon" />
+                        <span className="menu__admin__name">Меню</span>
+                    </button>
+
+                    <NavLink
+                        to={"/"}
+                        className={({ isPending }) =>
+                            isPending ? "menu__admin__link menu__admin__link--active" : "menu__admin__link"
+                        }
+                        onClick={logout}
+                    >
+                        <Logout_icon className="menu__admin__icon" />
+                        <span className="menu__admin__name">Выйти</span>
+                    </NavLink>
+                </div>
 
             </nav>
         </>

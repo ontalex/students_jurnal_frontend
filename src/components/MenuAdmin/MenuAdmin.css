@@ -1,23 +1,24 @@
-.menu {
-    position: fixed;
-    bottom: 0px;
-    left: 0;
-
+.menu__admin {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     gap: 8px;
-    align-items: start;
+    align-items: center;
+    flex-direction: column;
 
     padding: 6px;
-
-    width: 100vw;
 
     box-sizing: border-box;
 
     background-color: blueviolet;
 }
 
-.menu__link {
+.menu__section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.menu__admin__link {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,15 +37,15 @@
     text-decoration: none;
 }
 
-.menu__link--active {
+.menu__admin__link--active {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-.menu__link:hover {
+.menu__admin__link:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
-.menu__icon {
+.menu__admin__icon {
     --size_btn: 24px;
 
     width: var(--size_btn);
@@ -52,13 +53,11 @@
     border-radius: calc(var(--size_btn) * 0.2);
 }
 
-.menu__name {
+.menu__admin__name {
     color: white;
     font-family: sans-serif;
     font-size: 12px;
 }
-
-
 
 .submenu {
     width: 70svw;
@@ -80,4 +79,14 @@
     
     text-decoration: none;
     color: #000;
+}
+
+@media screen and (max-width: 596px) {
+    .menu__admin, .menu__section {
+        flex-direction: row;
+    }
+
+    .menu__admin {
+        justify-content: space-between;
+    }
 }

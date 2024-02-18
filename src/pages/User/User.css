@@ -1,15 +1,13 @@
 .user_page {
     box-sizing: border-box;
-    min-height: 100svh;
+    overflow-y: scroll;
     padding: 16px;
 }
 
 .user_container {
     max-width: 1200px;
+    width: 100%;
 
     margin: 0 auto;
     box-sizing: border-box;
-
-    padding-top: 32px;
-    padding-bottom: 120px;
 }

@@ -1,20 +1,21 @@
 .menu {
-    position: fixed;
-    bottom: 0px;
-    left: 0;
-
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     gap: 8px;
-    align-items: start;
+    align-items: center;
+    flex-direction: column;
 
     padding: 6px;
-
-    width: 100vw;
 
     box-sizing: border-box;
 
     background-color: blueviolet;
+}
+
+.menu__section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .menu__link {
@@ -55,4 +56,14 @@
     color: white;
     font-family: sans-serif;
     font-size: 12px;
+}
+
+@media screen and (max-width: 596px) {
+    .menu, .menu__section {
+        flex-direction: row;
+    }
+
+    .menu {
+        justify-content: space-between;
+    }
 }
