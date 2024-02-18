@@ -96,13 +96,17 @@ export default function Lesson(props) {
                     <p className={st.info_room}>Аудитория: {props.lesson.room}</p>
                 </div>
 
-                <button className={st.btn} onClick={() => setOpenUpdate(true)}>
-                    <EditIcon className={st.icon} />
-                </button>
+                <div className={st.info_edit_box}>
+                    <button className={st.btn} onClick={() => setOpenUpdate(true)}>
+                        <EditIcon className={st.icon} />
+                        <span>Изменить</span>
+                    </button>
 
-                <button className={st.btn} onClick={() => setOpenDelete(true)}>
-                    <DeleteIcon className={st.icon} />
-                </button>
+                    <button className={st.btn} onClick={() => setOpenDelete(true)}>
+                        <DeleteIcon className={st.icon} />
+                        <span>Удалить</span>
+                    </button>
+                </div>
 
             </div>
 
