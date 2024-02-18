@@ -21,11 +21,11 @@ export default function MaxOrder({ orderReq }) {
                                                                 })}
                                                         </th>
                                                 ))}
-                                                <th rowSpan={3}>Опозд.</th>
-                                                <th rowSpan={3}>УП</th>
-                                                <th rowSpan={3}>НП</th>
-                                                <th rowSpan={3}>ОБ</th>
-                                                <th rowSpan={3}>ВСЕГО Академ Часов</th>
+                                                <th rowSpan={3}>Опоздания</th>
+                                                <th rowSpan={3}>НУ (по уважительной)</th>
+                                                <th rowSpan={3}>Н (по не уважительной)</th>
+                                                <th rowSpan={3}>НБ (по болезни)</th>
+                                                <th rowSpan={3}>Всего академических часов</th>
                                         </tr>
                                         <tr>
                                                 {orderReq?.lessons.map((item) => (

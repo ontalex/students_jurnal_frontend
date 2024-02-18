@@ -10,11 +10,11 @@ export default function MinOrder({ orderReq }) {
                                 <thead>
                                         <tr>
                                                 <th rowSpan={1}>ИСП-321</th>
-                                                <th rowSpan={1}>Опозд.</th>
-                                                <th rowSpan={1}>УП</th>
-                                                <th rowSpan={1}>НП</th>
-                                                <th rowSpan={1}>ОБ</th>
-                                                <th rowSpan={1}>ВСЕГО Академ Часов</th>
+                                                <th rowSpan={1}>Опоздания</th>
+                                                <th rowSpan={1}>НУ (по уважительной)</th>
+                                                <th rowSpan={1}>Н (по не уважительной)</th>
+                                                <th rowSpan={1}>НБ (по болезни)</th>
+                                                <th rowSpan={1}>Всего академических часов</th>
                                         </tr>
                                 </thead>
                                 <tbody>
