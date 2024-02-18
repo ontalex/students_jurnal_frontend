@@ -7,12 +7,14 @@ import { MenuAdmin } from "../../components/MenuAdmin/MenuAdmin";
 
 const Admin = () => {
   return (
-    <div className="page">
+    <>
+      <div className="page">
         <div className="container">
-            <Outlet/>
+          <Outlet />
         </div>
-        <MenuAdmin />
-    </div>
+      </div>
+      <MenuAdmin />
+    </>
   )
 }
 
