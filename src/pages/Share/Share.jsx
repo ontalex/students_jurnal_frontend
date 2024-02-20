@@ -40,36 +40,39 @@ export const Share = () => {
                 return (
                         <div className={st.content}>
 
-                                <NavLink
-                                        to={"/"}
-                                        className={st.link_back}
-                                >
-                                        <CaretRight className={st.caret} />
-                                        <span className={st.link_span}>На главную</span>
-                                </NavLink>
+                                <div className={st.wrapper}>
+                                        <NavLink
+                                                to={"/"}
+                                                className={st.link_back}
+                                        >
+                                                <CaretRight className={st.caret} />
+                                                <span className={st.link_span}>На главную</span>
+                                        </NavLink>
 
-                                <div className={st.data_lesson}>
-                                        <ShareParam value={data.date_lesson} name={"Дата"} />
-                                        <ShareParam value={data.name_lesson} name={"Предмет"} />
-                                        <ShareParam value={data.number_lesson} name={"Номер пары"} />
+                                        <div className={st.data_lesson}>
+                                                <ShareParam value={data.date_lesson} name={"Дата"} />
+                                                <ShareParam value={data.name_lesson} name={"Предмет"} />
+                                                <ShareParam value={data.number_lesson} name={"Номер пары"} />
+                                        </div>
+
+                                        <table className={st.table} cellSpacing={0}>
+                                                <thead className={st.table_head}>
+                                                        <tr>
+                                                                <th>Студент</th>
+                                                                <th>Статус</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody className={st.table_body}>
+                                                        {
+                                                                data?.logs.map(log => <tr className={st.table_body_tr}>
+                                                                        <td>{log.full_name}</td>
+                                                                        <td className={log.type_log.includes("Присутствует") ? st.log_has : st.log_none}>{log.type_log}</td>
+                                                                </tr>)
+                                                        }
+                                                </tbody>
+                                        </table>
                                 </div>
 
-                                <table className={st.table} cellSpacing={0}>
-                                        <thead className={st.table_head}>
-                                                <tr>
-                                                        <th>Студент</th>
-                                                        <th>Статус</th>
-                                                </tr>
-                                        </thead>
-                                        <tbody className={st.table_body}>
-                                                {
-                                                        data?.logs.map(log => <tr className={st.table_body_tr}>
-                                                                <td>{log.full_name}</td>
-                                                                <td className={log.type_log.includes("Присутствует") ? st.log_has : st.log_none}>{log.type_log}</td>
-                                                        </tr>)
-                                                }
-                                        </tbody>
-                                </table>
                         </div>
                 )
         }
