@@ -74,7 +74,8 @@
 }
 
 .log_none,
-.log_has {
+.log_has,
+.log_await {
     font-weight: bold;
 }
 
@@ -84,4 +85,8 @@
 
 .log_none {
     color: red;
+}
+
+.log_await {
+    color: black;
 }

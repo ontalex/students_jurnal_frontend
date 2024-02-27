@@ -1,4 +1,4 @@
-import React, { ReactComponent } from 'react';
+import React, { ReactComponent, useCallback } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { BASE } from '../../services/auth.service';
@@ -27,6 +27,16 @@ export const Share = () => {
         };
 
         const { data, status } = useQuery('logsShare', fetchGetLogs);
+
+        let getStyle = useCallback((value) => {
+                if (value.type_log.includes("Присутствует")) {
+                        return st.log_has
+                } else if (value.type_log.includes("Опоздание")) {
+                        return st.log_await
+                } else {
+                        return st.log_none
+                }
+        }, []);
 
         if (!token) {
                 return <div>
@@ -66,7 +76,7 @@ export const Share = () => {
                                                         {
                                                                 data?.logs.map(log => <tr className={st.table_body_tr}>
                                                                         <td>{log.full_name}</td>
-                                                                        <td className={log.type_log.includes("Присутствует") ? st.log_has : st.log_none}>{log.type_log}</td>
+                                                                        <td className={ getStyle(log) }>{log.type_log}</td>
                                                                 </tr>)
                                                         }
                                                 </tbody>
