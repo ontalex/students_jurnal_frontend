@@ -1,3 +1,33 @@
+.lesson_wrapper {
+    border-radius: 4px;
+    margin-top: 16px;
+    box-shadow: 1px 1px 4px #0003;
+    overflow: hidden;
+}
+
+.lesson_about {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    color: white;
+    background-color: #8c50c4;
+    padding: 12px 20px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+
+
+}
+.lesson_number {
+    
+    margin: 0px;
+    font-weight: bold;
+}
+.lesson_time {
+    margin: 0px;
+}
+
 .lesson {
 
     display: grid;
@@ -6,12 +36,6 @@
     align-items: center;
 
     padding: 20px 20px;
-
-    border-radius: 4px;
-    
-    box-shadow: 1px 1px 4px #0003;
-    
-    margin-top: 16px;
 
     background-color: white;
 }
