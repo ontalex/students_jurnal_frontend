@@ -18,7 +18,7 @@ export default function Lesson(props) {
   });
 
   let switchTimeLesson = useCallback(() => {
-    switch (props.index) {
+    switch (props.index + 1) {
         case 1:
             return "9:00 - 10:30";
         case 2:
