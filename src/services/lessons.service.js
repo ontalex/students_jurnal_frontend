@@ -1,6 +1,6 @@
-let BASE = "https://ontalex.ru/alt/api";
+import { BASE } from "./vars.js";
 
-export let newLesson = async ({name_lesson, name_teacher}) => {
+export let newLesson = async ({ name_lesson, name_teacher }) => {
     let body = {
         name_lesson: name_lesson,
         name_teacher: name_teacher,
@@ -17,7 +17,7 @@ export let newLesson = async ({name_lesson, name_teacher}) => {
     return !res.ok ? { status: "error" } : res.json();
 };
 
-export let updateLesson = async ({name_lesson, id_teacher, id_lesson}) => {
+export let updateLesson = async ({ name_lesson, id_teacher, id_lesson }) => {
     let body = {
         name_lesson: name_lesson,
         id_teacher: id_teacher,

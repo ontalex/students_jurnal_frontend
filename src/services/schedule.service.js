@@ -1,4 +1,4 @@
-let BASE = "https://ontalex.ru/alt/api";
+import { BASE } from "./vars.js";
 
 export const getDaySchedule = async (date) => {
 
@@ -44,11 +44,11 @@ export const getOneSchedule = async (id_schedule) => {
     return !res.ok ? { status: "error" } : res.json();
 };
 
-export const addSchedule = async ({date_lesson, number_lesson, name_lesson}) => {
-    
+export const addSchedule = async ({ date_lesson, number_lesson, name_lesson }) => {
+
     let body = {
-        "date_lesson": date_lesson, 
-        "number_lesson": number_lesson, 
+        "date_lesson": date_lesson,
+        "number_lesson": number_lesson,
         "name_lesson": name_lesson
     }
 
@@ -79,8 +79,8 @@ export const deleteSchedule = async (id_schedule) => {
 
 }
 
-export const updateSchedule = async ({fullname_teacher, id_schedule, name_lesson, room}) => {
-    
+export const updateSchedule = async ({ fullname_teacher, id_schedule, name_lesson, room }) => {
+
     let body = {
         "id_schedule": id_schedule,
         "fullname_teacher": fullname_teacher,

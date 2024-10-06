@@ -5,7 +5,7 @@ import st from "./style.module.css";
 import { getCountLessons } from '../../services/stutistic.service';
 import GridStatisticLessons from '../../components/GridStatisticLessons/GridStatisticLessons';
 
-export const UserStatistic = () => {
+const UserStatistic = () => {
         let [dateStart, setDateStart] = useState(
                 new Date().toISOString().split("T")[0]
         );
@@ -22,7 +22,7 @@ export const UserStatistic = () => {
                 statistic.mutateAsync(body);
         }
 
-        useEffect( () => getState(dateStart, dateEnd), [] );
+        useEffect(() => getState(dateStart, dateEnd), []);
 
         let statistic = useMutation({
                 mutationFn: (body) => getCountLessons(body)
@@ -46,3 +46,5 @@ export const UserStatistic = () => {
                 </>
         )
 };
+
+export default UserStatistic;

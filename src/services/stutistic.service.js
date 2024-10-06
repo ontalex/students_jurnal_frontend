@@ -1,4 +1,4 @@
-let BASE = "https://ontalex.ru/alt/api";
+import { BASE } from "./vars.js";
 
 export let getStudentlogsBetween = async ({ student, begin_date, end_date }) => {
         let body = {
@@ -19,7 +19,7 @@ export let getStudentlogsBetween = async ({ student, begin_date, end_date }) => 
         return !res.ok ? { status: "error" } : res.json();
 }
 
-export let getCountLessons = async ({date_begin, date_end}) => {
+export let getCountLessons = async ({ date_begin, date_end }) => {
         let body = {
                 date_begin: date_begin,
                 date_end: date_end

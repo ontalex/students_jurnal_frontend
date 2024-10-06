@@ -19,18 +19,23 @@ export default function Lesson(props) {
 
   let switchTimeLesson = useCallback(() => {
     switch (props.index + 1) {
-        case 1:
-            return "9:00 - 10:30";
-        case 2:
-            return "10:50 - 12:20";
-        case 3:
-            return "12:40 - 14:10";
-        case 4:
-            return "14:30 - 16:00";
-        case 5:
-            return "16:10 - 17:40";
+      case 1:
+        return "9:00 - 10:30";
+        break;
+      case 2:
+        return "10:50 - 11:35 | 11:55 - 12:40";
+        break;
+      case 3:
+        return "13:00 - 14:30";
+        break;
+      case 4:
+        return "14:50 - 16:20";
+        break;
+      case 5:
+        return "16:30 - 18:00";
+        break;
     };
-});
+  });
 
   let [openUpdate, setOpenUpdate] = useState(false);
   let [openDelete, setOpenDelete] = useState(false);
@@ -100,8 +105,8 @@ export default function Lesson(props) {
     <>
       <div className={st.lesson_wrapper}>
         <div className={st.lesson_about}>
-            <p className={st.lesson_number}>Пара №{props.index + 1}</p>
-            <p className={st.lesson_time}>{switchTimeLesson()}</p>
+          <p className={st.lesson_number}>Пара №{props.index + 1}</p>
+          <p className={st.lesson_time}>{switchTimeLesson()}</p>
         </div>
         <div className={st.lesson}>
           <div className={st.info}>

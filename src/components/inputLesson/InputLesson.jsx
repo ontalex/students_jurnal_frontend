@@ -4,7 +4,7 @@ import st from "./style.module.css";
 import { useMutation } from 'react-query';
 import { getDaySchedule } from '../../services/schedule.service';
 
-export default function InputLesson (props) {
+export default function InputLesson({ changeLesson, date }) {
 
   let [schedule, setSchedule] = useState([]);
 
@@ -13,14 +13,18 @@ export default function InputLesson (props) {
     onSuccess: (data, variables, context) => {
       console.table(data);
       setSchedule(data);
-      props.changeLesson(data[0]?.id_schedule || null);
-      console.log(data[0]);
+      if (data.length > 0) {
+        changeLesson(data[0]?.id_schedule || null);
+        console.log(data[0]);
+      }
     }
   })
 
   useEffect(() => {
-    lessons.mutateAsync(props.date);
-  }, [props.date]);
+    // lessons.mutateAsync("2024-09-02");
+    lessons.mutateAsync(date);
+    console.log("Date: ", date);
+  }, [date]);
 
 
   return (
@@ -32,7 +36,7 @@ export default function InputLesson (props) {
             className={st.box_select}
             name="schedule"
             id="schedule_id"
-            onChange={(e) => props.changeLesson(Number(e.target.value))}
+            onChange={(e) => changeLesson(Number(e.target.value))}
             defaultValue={schedule[0]}>
 
             {

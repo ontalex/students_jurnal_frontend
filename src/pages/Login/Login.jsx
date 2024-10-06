@@ -84,7 +84,7 @@ export default function Login() {
                     </form>
                 </div>
                 <Link to={"/"} className={st.link_main}>
-                    <IconCaret className={st.link_main_icon}/>
+                    <IconCaret className={st.link_main_icon} />
                     <p>На главную</p>
                 </Link>
             </div>

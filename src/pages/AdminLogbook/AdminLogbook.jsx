@@ -8,21 +8,21 @@ import PopapLoading from "../../components/PopapLoading/PopapLoading";
 import PopapError from "../../components/PopapError/PopapError";
 
 import { useMutation } from "react-query";
+import { BASE } from "../../services/vars.js";
 import "./AdminLogbook.css";
 
 import React, { useState } from 'react'
 import { getLogs } from "../../services/logbook.service.js";
-import { BASE } from "../../services/auth.service.js";
 
 export default function AdminLogbook() {
 
   let [logs, setLogs] = useState([]);
   let [date, setDate] = useState(() => { return new Date() });
 
-  let [lesson, setLesson] = useState();
+  let [lesson, setLesson] = useState(null);
   let [share, setShare] = useState("");
 
-  const fetchGetLogs = async () => {
+  const fetchGetLogs = React.useCallback(async (dateReq, lessonReq) => {
 
     const response = await fetch(`${BASE}/shortcreate`, {
       method: "POST",
@@ -32,27 +32,27 @@ export default function AdminLogbook() {
       },
       body: JSON.stringify(
         {
-          "date_lesson": new Date(date).toISOString().split("T")[0],
-          "number_lesson": lesson
+          "date_lesson": new Date(dateReq).toISOString().split("T")[0],
+          "number_lesson": lessonReq
         }
       )
     });
     return response.json();
-  };
+  }, []);
 
   const handleShare = () => {
     logsMutation.mutate()
   }
 
-  let { mutate, isLoading, isError } = useMutation({
-    mutationFn: (id) => getLogs(id),
+  let mutateMainLogs = useMutation({ // мутация основного списка
+    mutationFn: (id, date) => getLogs(id, date),
     onSuccess: (data) => {
       setLogs(data);
     }
   });
 
-  let logsMutation = useMutation({
-    mutationFn: (date, lesson) => fetchGetLogs(date, lesson),
+  let logsMutation = useMutation({ // мутация для короткой ссылки логов
+    mutationFn: (dateReq, lessonReq) => fetchGetLogs(dateReq, lessonReq),
     onSuccess: (data) => {
       setShare(window.location.origin + "/p/apps/jurnal/#/share/logbook/" + data.token)
     }
@@ -61,8 +61,11 @@ export default function AdminLogbook() {
   useEffect(() => {
 
     if (lesson) {
-      mutate(lesson)
+      mutateMainLogs.mutate(lesson, date)
     }
+
+    console.log("LESSTON USEEFFECT: ", lesson);
+    console.log("DATE USEEFFECT: ", date);
 
   }, [lesson, date]);
 
@@ -71,13 +74,13 @@ export default function AdminLogbook() {
       <InputDate changeDate={setDate} date={date} />
       <InputLesson changeLesson={setLesson} date={date} />
 
-      {isLoading && <PopapLoading />}
-      {isError && <PopapError />}
+      {mutateMainLogs.isLoading && <PopapLoading />}
+      {mutateMainLogs.isError && <PopapError />}
 
       <button className="logbook__share__btn" onClick={(date, lesson) => handleShare(date, lesson)}><span>Поделиться</span></button>
 
       {
-        logsMutation.isSuccess &&
+        Boolean(lesson) && logsMutation.isSuccess &&
         <div className="logbook__share">
           <YandexShare link={share} />
           <a href={share}>Список посещаемости</a>
@@ -88,7 +91,7 @@ export default function AdminLogbook() {
 
         {
 
-          Boolean(logs.length) && Boolean(lesson) && !isLoading ?
+          Boolean(logs.length) && Boolean(lesson) && !mutateMainLogs.isLoading ?
             logs.map(
               (student, index) =>
                 <LogItem
@@ -98,6 +101,8 @@ export default function AdminLogbook() {
                   log_state={student.type_log || ''}
                   id_log={student.id_log}
                   key={student.id_student}
+                  date_start={student.date_start}
+                  date_end={student.date_end}
                 />
             ) :
             null

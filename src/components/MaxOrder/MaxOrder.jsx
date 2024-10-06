@@ -10,7 +10,7 @@ export default function MaxOrder({ orderReq }) {
                                 </caption>
                                 <thead>
                                         <tr>
-                                                <th rowSpan={3}>ИСП-321</th>
+                                                <th rowSpan={3}>ИСП-421</th>
                                                 {orderReq?.lessons.map((item) => (
                                                         <th>
                                                                 {new Date(
@@ -64,7 +64,7 @@ export default function MaxOrder({ orderReq }) {
                                 <tfoot>
                                         <tr>
                                                 <th>Куратор</th>
-                                                <td colSpan={4}>Полтева В. С.</td>
+                                                <td colSpan={4}>Яковец Е. Е.</td>
                                                 <td colSpan={3}> </td>
                                         </tr>
                                         <tr>
