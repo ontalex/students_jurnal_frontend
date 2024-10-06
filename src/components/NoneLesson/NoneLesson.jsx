@@ -4,6 +4,7 @@ import st from "./style.module.css";
 
 import { ReactComponent as PluseIcon } from "../../pic/pluse_icon.svg";
 import Modal from "../Modal/Modal";
+import { BASE } from "../../services/vars";
 
 export default function NoneLesson(props) {
 
@@ -27,7 +28,7 @@ export default function NoneLesson(props) {
 
         console.log(data);
 
-        fetch("https://ontalex.ru/alt/api/schedule", {
+        fetch(`${BASE}/schedule`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -9,7 +9,7 @@ export default function MinOrder({ orderReq }) {
                                 </caption>
                                 <thead>
                                         <tr>
-                                                <th rowSpan={1}>ИСП-321</th>
+                                                <th rowSpan={1}>ИСП-421</th>
                                                 <th rowSpan={1}>Опоздания</th>
                                                 <th rowSpan={1}>НУ (по уважительной)</th>
                                                 <th rowSpan={1}>Н (по не уважительной)</th>
@@ -38,7 +38,7 @@ export default function MinOrder({ orderReq }) {
                                 <tfoot>
                                         <tr>
                                                 <th>Куратор</th>
-                                                <td colSpan={3}>Полтева В. С.</td>
+                                                <td colSpan={3}>Яковец Е. Е.</td>
                                                 <td colSpan={2}> </td>
                                         </tr>
                                         <tr>

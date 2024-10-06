@@ -11,7 +11,7 @@ const client = new QueryClient();
 root.render(
     <React.Fragment>
         <QueryClientProvider client={client}>
-            <App/>
+            <App />
         </QueryClientProvider>
     </React.Fragment>
 );

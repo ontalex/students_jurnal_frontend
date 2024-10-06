@@ -1,4 +1,4 @@
-let BASE = "https://ontalex.ru/alt/api";
+import { BASE } from "./vars.js";
 
 export const pushState = async (data) => {
 
@@ -17,12 +17,12 @@ export const pushState = async (data) => {
         body: JSON.stringify(body)
     });
 
-    return !res.ok ? {status: "error"} : res.json()
+    return !res.ok ? { status: "error" } : res.json()
 
 }
 
 export const updateLog = async (data) => {
-    
+
     let body = {
         type_log: data.type_log,
         id: data.id
@@ -37,14 +37,15 @@ export const updateLog = async (data) => {
         body: JSON.stringify(body)
     });
 
-    return !res.ok ? {status: "error"} : res.json()
+    return !res.ok ? { status: "error" } : res.json()
 
-} 
+}
 
-export const getLogs = async (id_lesson) => {
+export const getLogs = async (id_lesson, date_lesson) => {
 
     let body = {
-        id_lesson: id_lesson
+        id_lesson: id_lesson,
+        date_lesson: date_lesson
     }
 
     let res = await fetch(BASE + "/logbooks", {
@@ -56,12 +57,12 @@ export const getLogs = async (id_lesson) => {
         body: JSON.stringify(body)
     })
 
-    return !res.ok ? {status: "error"} : res.json()
+    return !res.ok ? { status: "error" } : res.json()
 
 }
 
 export const deleteLog = async (id_log) => {
-    
+
     let res = await fetch(`${BASE}/logbook?id=${id_log}`, {
         method: "DELETE",
         headers: {
@@ -70,12 +71,12 @@ export const deleteLog = async (id_log) => {
         }
     })
 
-    return !res.ok ? {status: "error"} : res.json()
+    return !res.ok ? { status: "error" } : res.json()
 
 }
 
 export const getLog = async (id_log) => {
-    
+
     let res = await fetch(`${BASE}/logbook?id=${id_log}`, {
         method: "GET",
         headers: {
@@ -84,6 +85,6 @@ export const getLog = async (id_log) => {
         }
     })
 
-    return !res.ok ? {status: "error"} : res.json()
+    return !res.ok ? { status: "error" } : res.json()
 
 }

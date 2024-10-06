@@ -10,24 +10,26 @@ import React, { useEffect, useState, useMemo } from 'react';
 import PopapError from "../../components/PopapError/PopapError";
 import PopapLoading from "../../components/PopapLoading/PopapLoading";
 import useFormateLessons from "../../hooks/useFormateLessons.js";
+import { BASE } from "../../services/vars.js";
 
 const AdminSchedule = () => {
 
   let [list, setList] = useState([{}, {}, {}, {}, {}]);
-  let [date, setDate] = useState(() => { return new Date() });
+  let [outSchedule, setOutSchedule] = useState([{}]);
+  let [date, setDate] = useState(() => { return new Date().toISOString().split("T")[0] });
   let [teachers, setTeachers] = useState([]);
   let [lessons, setLessons] = useState([]);
 
 
   useEffect(() => {
     const fetchDateLessons = async () => {
-      const response = await fetch('https://ontalex.ru/alt/api/lessons');
+      const response = await fetch(`${BASE}/lessons`);
       const result = await response.json();
       setLessons(result);
     };
 
     const fetchDateTeachers = async () => {
-      const response = await fetch('https://ontalex.ru/alt/api/teachers');
+      const response = await fetch(`${BASE}/teachers`);
       const result = await response.json();
       setTeachers(result);
     };
@@ -42,7 +44,13 @@ const AdminSchedule = () => {
   let requestScheduleDay = useMutation({
     mutationFn: (date) => getDaySchedule(date),
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    onSuccess: (json) => useFormateLessons(json, setList)
+    onSuccess: (json) => {
+      console.log("LIST SCHEDULE: ", json);
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      useFormateLessons(json, setList);
+      console.log("JSON: ", json);
+      setOutSchedule(() => json.out_schedule);
+    }
   });
 
   useEffect(() => {
@@ -51,6 +59,8 @@ const AdminSchedule = () => {
     }
 
     requestScheduleDay.mutate(date);
+
+    console.log("DATA OUT SCHEDULE: ", outSchedule);
 
     return () => { };
 
@@ -64,8 +74,14 @@ const AdminSchedule = () => {
   return (
     <>
       <InputDate date={date} changeDate={changeDate} />
-      {requestScheduleDay.isError && <PopapError/>}
-      {requestScheduleDay.isLoading && <PopapLoading/>}
+      {/* <p>{JSON.stringify(outSchedule)}</p> */}
+      {
+        Boolean(outSchedule?.length > 0) ? <div>
+          <a href={outSchedule[0]?.path}>{outSchedule[0]?.title}</a>
+        </div> : null
+      }
+      {requestScheduleDay.isError && <PopapError />}
+      {requestScheduleDay.isLoading && <PopapLoading />}
       <div className="list">
         {
           list.map((lesson, index) => {
@@ -76,7 +92,7 @@ const AdminSchedule = () => {
                 lesson={lesson}
                 lessons={memoizedLessons}
                 teachers={memoizedTeachers}
-                changeDate={changeDate} 
+                changeDate={changeDate}
               /> :
               <NoneLesson
                 date={date}

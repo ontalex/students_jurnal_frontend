@@ -1,4 +1,4 @@
-export let BASE = "https://ontalex.ru/alt/api";
+import { BASE } from "./vars.js";
 
 export let auth = async ({ login, password }) => {
 

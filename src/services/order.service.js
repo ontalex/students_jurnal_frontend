@@ -1,5 +1,4 @@
-let BASE = "https://ontalex.ru/alt/api";
-
+import { BASE } from "./vars.js";
 
 /**
  * 

@@ -1,16 +1,16 @@
 import React, { ReactComponent, useCallback } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { BASE } from '../../services/auth.service';
 import PopapLoading from '../../components/PopapLoading/PopapLoading';
 import PopapError from '../../components/PopapError/PopapError';
 
+import { BASE } from "../../services/vars.js";
 import st from "./style.module.css";
 
 import { ReactComponent as CaretRight } from '../../pic/caret_right.svg';
 import { ShareParam } from '../../components/ShareParam/ShareParam';
 
-export const Share = () => {
+const Share = () => {
 
         let token = useParams().short_token || null;
 
@@ -70,13 +70,15 @@ export const Share = () => {
                                                         <tr>
                                                                 <th>Студент</th>
                                                                 <th>Статус</th>
+                                                                <th>Дополнение</th>
                                                         </tr>
                                                 </thead>
                                                 <tbody className={st.table_body}>
                                                         {
                                                                 data?.logs.map(log => <tr className={st.table_body_tr}>
                                                                         <td>{log.full_name}</td>
-                                                                        <td className={ getStyle(log) }>{log.type_log}</td>
+                                                                        <td className={getStyle(log)}>{log.type_log}</td>
+                                                                        <td>{Boolean(log.date_start != null) && Boolean(log.date_end != null) ? "Индивидуальный учебный план" : ""}</td>
                                                                 </tr>)
                                                         }
                                                 </tbody>
@@ -87,3 +89,5 @@ export const Share = () => {
                 )
         }
 }
+
+export default Share;

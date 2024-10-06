@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { BASE } from "../services/vars";
 
 export const AuthContext = createContext(null);
 
@@ -6,7 +7,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     const check = (cb) => {
-        fetch("https://ontalex.ru/alt/api/check", {
+        fetch(`${BASE}/check`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -32,7 +33,7 @@ export const AuthProvider = ({ children }) => {
             ...newUser,
         };
 
-        fetch("https://ontalex.ru/alt/api/auth", {
+        fetch(`${BASE}/auth`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

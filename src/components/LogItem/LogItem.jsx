@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import st from "./style.module.css";
 import { useMutation } from "react-query";
+import PopapLoading from "../PopapLoading/PopapLoading";
 import {
     deleteLog,
     pushState,
@@ -32,7 +33,7 @@ export default function LogItem(props) {
         type: props.log_state,
     });
 
-    
+
 
     let pushStateQuery = useMutation({
         mutationFn: (data) => pushState(data),
@@ -63,7 +64,12 @@ export default function LogItem(props) {
                 ...log,
                 type: undefined,
             });
-            setStyleLog(() => [st.log, choseType('')].join(" "));
+            setStyleLog(() => [
+                st.log,
+                choseType(''),
+                Boolean(props.date_start != null) && Boolean(props.date_end != null) ? st.iup : ""
+            ].join(" ")
+            );
         },
     });
 
@@ -88,14 +94,15 @@ export default function LogItem(props) {
         console.groupEnd();
     };
 
-    
+
 
     return (
         <label className={styleLog}>
+            {Boolean(props.date_start != null) && Boolean(props.date_end != null) ? <p className={st.iup_text}>ИУП</p> : null}
             <p className={st.log_name}>{props.student_name}</p>
             <div className={st.state_box}>
                 {pushStateQuery.isLoading && (
-                    <span className={st.log_loading}>Отправка...</span>
+                    <PopapLoading size_w={20} size_h={20} />
                 )}
                 {pushStateQuery.isError && (
                     <span className={st.log_error}>Ошибка!</span>

@@ -11,6 +11,7 @@ import useFormateLessons from "../../hooks/useFormateLessons.js";
 
 export default function UserHome() {
     let [date, setDate] = useState(new Date());
+    let [outSchedule, setPutSchedule] = useState([{}]);
     let [list, setList] = useState([]);
 
     useEffect(() => mutate(date), [date]);
@@ -18,20 +19,26 @@ export default function UserHome() {
     let { mutate, isLoading, isError } = useMutation({
         mutationFn: (data) => getDaySchedule(data),
         // eslint-disable-next-line react-hooks/rules-of-hooks
-        onSettled: (json) => useFormateLessons(json, setList)
+        onSettled: (json) => { useFormateLessons(json.rows, setList); setPutSchedule(() => json.out_schedule); }
     });
     return (
         <>
             <InputDate date={date} changeDate={setDate} />
 
+            {
+                Boolean(outSchedule?.length > 0) ? <div>
+                    <a href={outSchedule[0]?.path}>{outSchedule[0]?.title}</a>
+                </div> : null
+            }
+
             {isLoading && <PopapLoading />}
             {isError && <PopapError />}
-            
+
             <div className="user_list">
-            
-                {          
+
+                {
                     list.map((lesson, index) => {
-                        
+
                         return <Lesson lesson={lesson} numberLesson={index + 1} />
                     })
                 }

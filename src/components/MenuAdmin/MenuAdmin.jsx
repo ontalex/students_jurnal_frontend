@@ -49,6 +49,20 @@ export const MenuAdmin = () => {
                         >
                             <span>Создать отчёт</span>
                         </NavLink>
+                        <NavLink
+                            to={"individual"}
+                            className="submenu__link"
+                            onClick={() => setOpenMenu(false)}
+                        >
+                            <span>Индивидуальные планы</span>
+                        </NavLink>
+                        <NavLink
+                            to={"duty"}
+                            className="submenu__link"
+                            onClick={() => setOpenMenu(false)}
+                        >
+                            <span>Дежурства</span>
+                        </NavLink>
                     </div>
 
                 </div>
