@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as rq from "react-query";
 import * as indiService from "../../services/individual.service";
 import PopapLoading from "../../components/PopapLoading/PopapLoading";
 import PopapError from "../../components/PopapError/PopapError";
+import { debounce } from "lodash";
 
 import st from './style.module.css';
+import Modal from "../../components/Modal/Modal";
+import InputDate from "../../components/inputDate/InputDate";
 
 export default function AdminIndividual() {
     // мутант на обновление списка
@@ -13,12 +16,16 @@ export default function AdminIndividual() {
     })
 
     // мутант на добавление данных
-
-
     // мутант на изменение данных
     // мутант на удаление данных
 
     // состояние на окно добавления
+    const [open, setOpen] = useState(false);
+
+    // Управляющие методы
+    const handleChangeStatusWindow = () => {
+        setOpen((state) => !state)
+    }
 
     useEffect(() => {
         mutationGet.mutate()
@@ -29,6 +36,12 @@ export default function AdminIndividual() {
         <button onClick={() => mutationGet.mutate()} className={st.btn}>
             <span>Обновить</span>
         </button >
+
+        <Modal open={open} onClose={handleChangeStatusWindow}>
+            <h1>Добавить</h1>
+            <InputDate />
+            <InputStudent />
+        </Modal>
 
         {mutationGet.isLoading && <PopapLoading />}
         {mutationGet.isError && <PopapError />}
@@ -51,4 +64,43 @@ export default function AdminIndividual() {
             })}
         </div> : <p>Нету данных</p>}
     </>)
+}
+
+const InputStudent = ({ toSet, toGet }) => {
+    const [value, setValue] = React.useState('');
+    const handleSearch = (value) => {
+        console.log("Search for:", value);
+    }
+    const debouncedSearch = React.useCallback(debounce(handleSearch, 500), []);
+    const handleChange = (event) => {
+        const value = event.target.value;
+        setValue(value);
+        debouncedSearch(value);
+    }
+    return (
+        <div className={st.input}>
+            <input
+                type="text"
+                className={st.input__box}
+                value={value}
+                id="input_student"
+                name="input_student"
+                list="input_student_list"
+                onChange={handleChange}
+            />
+            <datalist id="input_student_list">
+                {
+                    value.length > 0
+                        ? <>
+                            {
+
+                            }
+                        </>
+                        : null}
+            </datalist>
+            <div className={st.status}>
+
+            </div>
+        </div>
+    )
 }
