@@ -11,11 +11,11 @@ export default function InputLesson({ changeLesson, date }) {
   let lessons = useMutation({
     mutationFn: (date_lesson) => getDaySchedule(date_lesson),
     onSuccess: (data, variables, context) => {
-      console.table(data);
-      setSchedule(data);
-      if (data.length > 0) {
-        changeLesson(data[0]?.id_schedule || null);
-        console.log(data[0]);
+      console.table(data.rows);
+      setSchedule(data.rows);
+      if (data.rows.length > 0) {
+        changeLesson(data.rows[0]?.id_schedule || null);
+        console.log(data.rows[0]);
       }
     }
   })
