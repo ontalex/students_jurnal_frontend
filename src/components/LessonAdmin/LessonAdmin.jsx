@@ -101,6 +101,8 @@ export default function Lesson(props) {
       });
   };
 
+
+
   return (
     <>
       <div className={st.lesson_wrapper}>

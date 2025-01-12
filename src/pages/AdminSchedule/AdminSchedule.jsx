@@ -45,10 +45,10 @@ const AdminSchedule = () => {
     mutationFn: (date) => getDaySchedule(date),
     // eslint-disable-next-line react-hooks/rules-of-hooks
     onSuccess: (json) => {
-      console.log("LIST SCHEDULE: ", json);
+      console.log("LIST SCHEDULE: ", json.rows);
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      useFormateLessons(json, setList);
-      console.log("JSON: ", json);
+      useFormateLessons(json.rows, setList);
+      console.log("JSON: ", json.rows);
       setOutSchedule(() => json.out_schedule);
     }
   });
