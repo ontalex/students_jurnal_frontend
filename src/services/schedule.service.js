@@ -1,3 +1,4 @@
+import axios from "axios";
 import { BASE } from "./vars.js";
 
 export const getDaySchedule = async (date) => {
@@ -99,4 +100,17 @@ export const updateSchedule = async ({ fullname_teacher, id_schedule, name_lesso
 
     return !res.ok ? { status: "error" } : res.json();
 
+}
+
+export const getPrevSchedule = async ({ date, number_lesson }) => {
+    let params = { number_lesson: date, date_lesson: number_lesson };
+
+    let res = await axios.get(`${BASE}/schedule/prev`, {
+        params: params,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+
+    return (res.status !== 200) ? { status: "error" } : res.data;
 }

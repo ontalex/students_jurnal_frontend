@@ -21,8 +21,7 @@
     background-color: #e7e7e7;
 }
 
-.btn_icon {
-}
+.btn_icon {}
 
 .btn_span {
     font-family: "Roboto-Regular", Helvetica;
@@ -36,7 +35,8 @@
 .form {
     display: grid;
     gap: 16px;
-    width: 300px;
+    min-width: 300px;
+    max-width: 90svw;
 }
 
 .form_input {
@@ -52,7 +52,9 @@
     font-size: 16px;
 }
 
-.form_input::placeholder, .form_input::-moz-placeholder, .form_input::-webkit-input-placeholder {
+.form_input::placeholder,
+.form_input::-moz-placeholder,
+.form_input::-webkit-input-placeholder {
     color: gray;
 }
 

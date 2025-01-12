@@ -1,0 +1,74 @@
+.box {
+    padding: 12px;
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.05);
+
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 16px;
+    align-items: center;
+}
+
+.info {}
+
+.info__name {
+    font-size: 20px;
+    margin: 8px 0;
+}
+
+.about {
+    display: flex;
+    gap: 8px;
+}
+
+.about__lesson {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 6px 8px;
+    border-radius: 4px;
+
+    margin: 0;
+}
+
+.about__teacher {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 6px 8px;
+    border-radius: 4px;
+
+    margin: 0;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    padding: 12px;
+
+    border-radius: 6px;
+    border: 0px;
+
+    background-color: #A667E1;
+
+    transition: background-color .2s ease;
+}
+
+.btn:hover {
+    background-color: #7738B2;
+}
+
+.btn .btn_icon {
+    --size_icon: 20px;
+    width: var(--size_icon);
+    height: var(--size_icon);
+}
+
+.btn .btn_icon path {
+    fill: #fff;
+}
+
+.btn .btn_span {
+    color: #fff;
+    font-family: "Roboto-Regular", Helvetica;
+    font-size: 16px;
+}

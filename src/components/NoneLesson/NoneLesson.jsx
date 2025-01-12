@@ -2,13 +2,64 @@ import React, { useEffect, useState } from "react";
 
 import st from "./style.module.css";
 
+import st_prev from "./previewComponent.module.css"
+
 import { ReactComponent as PluseIcon } from "../../pic/pluse_icon.svg";
 import Modal from "../Modal/Modal";
 import { BASE } from "../../services/vars";
+import useFetch from "../../hooks/useFetch";
+import PopapLoading from "../PopapLoading/PopapLoading";
+import PopapError from "../PopapError/PopapError";
+import axios from "axios";
+
+function PrevSchedule({ date, number_lesson, setOpen, disabled, setDisable }) {
+    const fetchPrevSchedule = useFetch(
+        `${BASE}/schedule/prev`,
+        {
+            params: { number_lesson: number_lesson, date_lesson: date },
+            headers: {
+                "Content-Type": "application/json"
+            }
+        },
+        axios.get
+    );
+    const fetchSavePrevSchedule = useFetch(
+        `${BASE}/schedule/prev`
+    )
+    const handleCLick = (event) => {
+        event.preventDefault();
+        pushPrevSchedule(fetchPrevSchedule.data[0].id_schedule);
+    }
+    const pushPrevSchedule = (id) => {
+        setDisable(true);
+        setTimeout(() => { setOpen(false) }, 1000 * 10);
+        setDisable(false);
+    }
+    return (
+        <>
+            {fetchPrevSchedule.loading && <PopapLoading />}
+            {fetchPrevSchedule.error && <PopapError />}
+            {fetchPrevSchedule.data && fetchPrevSchedule.data[0] ? <div className={st_prev.box}>
+
+                <div className={st_prev.info}>
+                    <h1 className={st_prev.info__name}>{fetchPrevSchedule.data[0].name_lesson}</h1>
+                    <div className={st_prev.about}>
+                        <p className={st_prev.about__lesson}>№{fetchPrevSchedule.data[0].number_lesson}</p>
+                        <p className={st_prev.about__teacher}>{fetchPrevSchedule.data[0].fullname}</p>
+                    </div>
+                </div>
+                <button className={st_prev.btn} onClick={handleCLick}>
+                    <span className={st_prev.btn_span}>Скопировать</span>
+                </button>
+            </div> : null}
+        </>
+    )
+}
 
 export default function NoneLesson(props) {
 
     let [open, setOpen] = useState(false);
+    let [disable, setDisable] = useState(false);
 
     let handlerSubmit = (e) => {
         e.preventDefault();
@@ -70,7 +121,7 @@ export default function NoneLesson(props) {
                 <h2 className={st.modal_header}>Создать пару</h2>
                 <form action="" onSubmit={handlerSubmit} className={st.form}>
 
-                    <input list="lessons" name="lesson" className={st.form_input} type="text" placeholder="Пара" />
+                    <input disabled={disable} list="lessons" name="lesson" className={st.form_input} type="text" placeholder="Пара" />
                     <datalist id="lessons">
                         {
 
@@ -83,7 +134,7 @@ export default function NoneLesson(props) {
                         }
                     </datalist>
 
-                    <input list="teachers" name="teacher" className={st.form_input} type="text" placeholder="Преподаватель" />
+                    <input disabled={disable} list="teachers" name="teacher" className={st.form_input} type="text" placeholder="Преподаватель" />
                     <datalist id="teachers">
                         <option value="">
                             {
@@ -96,9 +147,11 @@ export default function NoneLesson(props) {
                         </option>
                     </datalist>
 
-                    <input className={st.form_input} type="text" name="room" id="" placeholder="Кабинет" maxLength={7} />
+                    <input className={st.form_input} disabled={disable} type="text" name="room" id="" placeholder="Кабинет" maxLength={7} />
 
-                    <button type="submit" className={st.form_btn}>
+                    <PrevSchedule date={props.date} number_lesson={props.index + 1} setOpen={setOpen} disabled={disable} setDisable={setDisable} />
+
+                    <button disabled={disable} type="submit" className={st.form_btn}>
                         <PluseIcon className={st.form_icon} />
                         <span className={st.form_span}>Отправить</span>
                     </button>
