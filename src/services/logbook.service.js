@@ -21,6 +21,23 @@ export const pushState = async (data) => {
 
 }
 
+export const extendLogbook = async (data) => {
+    let body = {
+        id_lesson: data.id_lesson,
+        id_student: data.id_student,
+        type_log: data.type_log
+    };
+    let req = await fetch(BASE + "/logbook/extend", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": localStorage.getItem("token") || ""
+        },
+        body: JSON.stringify(body)
+    })
+    return !req.ok ? { status: "error" } : req.json();
+}
+
 export const updateLog = async (data) => {
 
     let body = {
@@ -85,6 +102,31 @@ export const getLog = async (id_log) => {
         }
     })
 
-    return !res.ok ? { status: "error" } : res.json()
+    return !res.ok ? { status: "error" } : res.json();
 
+}
+
+export const getLogsShort = async (data) => {
+
+    console.group('Table short logs')
+    console.table({
+        data: data[0],
+        lesson: data[1]
+    });
+    console.groupEnd();
+
+    const response = await fetch(`${BASE}/shortcreate`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": localStorage.getItem("token") || ""
+        },
+        body: JSON.stringify(
+            {
+                "date_lesson": new Date(data[0]).toISOString().split("T")[0],
+                "number_lesson": data[1]
+            }
+        )
+    });
+    return response.json();
 }
