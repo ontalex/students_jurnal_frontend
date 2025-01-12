@@ -1,33 +1,41 @@
+import axios from 'axios';
 import { useState, useEffect, useCallback } from 'react';
 
-const useFetch = (url, params, method, immediately = true) => {
+const useFetch = (method, dataProps, immediately, onFinish = () => null) => {
     const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(immediately);
     const [error, setError] = useState(null);
 
-    const fetchData = useCallback(async () => {
+    const fetchData = useCallback(async (data) => {
         setLoading(true);
         setError(null);
+        console.log("USEFETCH: on useCalback");
         try {
-            const response = await method(url, params);
+            const response = await axios.request({
+                method,
+                ...data
+            });
             setData(response.data);
+            onFinish();
         } catch (err) {
             setError(err);
+            console.log(err);
         } finally {
             setLoading(false);
         }
-    }, [url]);
+    }, [method]);
 
     // Fetch data when the component mounts or the URL changes
     useEffect(() => {
-        if (immediately) {
-            fetchData();
+        if (immediately === true) {
+            console.log("USEFETCH: on useEffect");
+            fetchData(dataProps);
         }
-    }, [fetchData, immediately]);
+    }, []);
 
     // Refresh method
-    const refresh = () => {
-        fetchData();
+    const refresh = (data) => {
+        fetchData(data);
     };
 
     return { data, loading, error, refresh };

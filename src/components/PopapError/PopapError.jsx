@@ -1,10 +1,12 @@
 import React from "react";
 import st from "./style.module.css";
 
-export default function PopapError() {
+export default function PopapError({ text }) {
     return (
         <p className={[st.user__alert, st.user__error].join(" ")}>
-            что-то не так...
+            {
+                !text ? "что-то не так..." : text
+            }
         </p>
     );
 }

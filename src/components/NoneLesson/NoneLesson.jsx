@@ -13,18 +13,25 @@ import PopapError from "../PopapError/PopapError";
 import axios from "axios";
 
 function PrevSchedule({ date, number_lesson, setOpen, disabled, setDisable }) {
+    let [id, setId] = useState();
     const fetchPrevSchedule = useFetch(
-        `${BASE}/schedule/prev`,
+        "get",
         {
+            url: `${BASE}/schedule/prev`,
             params: { number_lesson: number_lesson, date_lesson: date },
             headers: {
                 "Content-Type": "application/json"
             }
         },
-        axios.get
+        true
     );
     const fetchSavePrevSchedule = useFetch(
-        `${BASE}/schedule/prev`
+        "post",
+        {
+            url: `${BASE}/schedule/prev`
+        },
+        false,
+        () => { setOpen(false) }
     )
     const handleCLick = (event) => {
         event.preventDefault();
@@ -32,7 +39,15 @@ function PrevSchedule({ date, number_lesson, setOpen, disabled, setDisable }) {
     }
     const pushPrevSchedule = (id) => {
         setDisable(true);
-        setTimeout(() => { setOpen(false) }, 1000 * 10);
+        setId(id);
+        fetchSavePrevSchedule.refresh({
+            url: `${BASE}/schedule/prev`,
+            params: { id },
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("token") || ""
+            }
+        });
         setDisable(false);
     }
     return (
@@ -49,6 +64,7 @@ function PrevSchedule({ date, number_lesson, setOpen, disabled, setDisable }) {
                     </div>
                 </div>
                 <button className={st_prev.btn} onClick={handleCLick}>
+                    {fetchSavePrevSchedule.loading && <PopapLoading />}
                     <span className={st_prev.btn_span}>Скопировать</span>
                 </button>
             </div> : null}
