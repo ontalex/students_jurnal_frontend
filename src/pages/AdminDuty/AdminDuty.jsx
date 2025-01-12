@@ -43,8 +43,8 @@ export default function AdminDuty() {
     return (
         <>
             {/* Форма даты и пары */}
-            <InputDate changeDate={() => { }} date={""} />
-            <InputLesson changeLesson={() => { }} date={""} />
+            <InputDate changeDate={changeDate} date={date} />
+            <InputLesson changeLesson={changeLesson} date={lesson} />
 
             {/* Форма создания Дежурства */}
             <form className={st.form}>
