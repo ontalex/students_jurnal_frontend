@@ -90,7 +90,9 @@ export default function NoneLesson(props) {
             number_lesson: props.index + 1,
             name_lesson: e.target.lesson.value, // id_lesson
             fullname_teacher: e.target.teacher.value, // id_teacher
-            room: e.target.room.value.trim()
+            room: e.target.room.value.trim(),
+            is_exam: e.target.is_exam.value,
+            is_cancel: e.target.is_cancel.value,
         }
 
         console.log(data);
@@ -164,6 +166,16 @@ export default function NoneLesson(props) {
                     </datalist>
 
                     <input className={st.form_input} disabled={disable} type="text" name="room" id="" placeholder="Кабинет" maxLength={7} />
+
+                    <label htmlFor="">
+                        <input className={st.form_input} disabled={disable} type="radio" name="is_exam" />
+                        <p>Экзамен</p>
+                    </label>
+
+                    <label htmlFor="">
+                        <input className={st.form_input} disabled={disable} type="radio" name="is_cancel" />
+                        <p>Отменена (электронная пара)</p>
+                    </label>
 
                     <PrevSchedule date={props.date} number_lesson={props.index + 1} setOpen={setOpen} disabled={disable} setDisable={setDisable} />
 
